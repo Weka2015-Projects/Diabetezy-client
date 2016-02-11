@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, Routes} from 'react-router'
+import { Router, Route } from 'react-router'
 
 import Diary from './diary/diary.jsx'
 import Alert from './alert/alert.jsx'
@@ -11,6 +11,6 @@ export default (
         <Route path='/' component ={Homepage} />
         <Route path='/alert' component ={Alert} />
         <Route path='/graph' component ={Graph} />
-        <Route path='diary' component = {Diary} />
+        <Route path='diary' component ={Diary} />
     </Router>
 )

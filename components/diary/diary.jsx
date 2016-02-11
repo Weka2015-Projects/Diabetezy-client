@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 
 class Diary extends Component {
-	console.log("katie")
+
+  render() {
+      return(
+          <div>Diary</div>
+      )
+  }
 }
 
 export default Diary

@@ -9,4 +9,3 @@ document.body.appendChild(app)
 
 ReactDOM.render(<App/>, app)
 
-console.log("katie")
