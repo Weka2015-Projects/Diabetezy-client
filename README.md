@@ -1,4 +1,4 @@
-# DiabetEZY
+# DiabetEZY (Client)
 
 An app that makes it easier for users who have diabetes to not only remember to test their blood sugar levels but also record them in a format which can easily be emailed to their doctor.
 
@@ -18,15 +18,18 @@ Server: https://waffle.io/Weka2015-Projects/Diabetezy-server
 
 - Two Repos, one for server one for client
 - Database
+- Web App
+- Mobile Cordova App
 
 ## Technologies
 
-- Testing
-- Cordova / iOS / ionic
+- Testing (Mocha / Chai)
+- Cordova
 - D3
 - React
-- Database
+- Database (Firebase)
 - Server
+- Authentication (Passport)
 
 ## Features
 
@@ -39,15 +42,20 @@ Server: https://waffle.io/Weka2015-Projects/Diabetezy-server
 - Email PDF / Render PDF
 - Authentication
 
+## Stretches
+
 ## Team Roles / Interests
 
 - Admin
     + Captain Agile (Git Master) - Michael
+    + Project details / docs - Tania
     
 - Front End
     + Colin (D3)
+    + Everyone
 
 - Back End
+    + Everyone
 
 ## Database Schema
 
@@ -71,10 +79,16 @@ NHI:
 user_id:
 ```
 
+## Deadlines
+
+- Feature Freeze - Tuesday
+- Code Freeze - Wednesday
+- Presentation Prep - Thursday
+- Presentations - Friday
+
 ## Things To Clarify
 
 - Compatibility between react and cordova / ionic
-- Code Freeze ?
 - Measurement System
 - Deployment ?
 - App Store
@@ -90,6 +104,7 @@ user_id:
 - Schema / Database set up
 
 ### Saturday
+(9AM - 10PM)
 
 - Server
 - API sending data to front end
@@ -98,7 +113,7 @@ user_id:
 
 ### Sunday
 
-(9AM - 2PM)
+(7AM - however long you can stay)
 
 - Tests passing
 - Authentication - firebase
