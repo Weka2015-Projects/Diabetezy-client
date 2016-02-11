@@ -3,5 +3,10 @@ main {
 }
 
 div {
-	margin: auto;
+  text-align: center;
+}
+
+#main {
+  background-color: powderblue;
+
 }

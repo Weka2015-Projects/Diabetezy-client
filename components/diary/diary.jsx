@@ -1,11 +1,17 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router'
 
 class Diary extends Component {
 
   render() {
-      return(
-          <div>Diary</div>
-      )
+    return (
+      <div>
+      <div>
+        <Link to={`/`}>Home</Link>
+      </div>
+        <div>Diary</div>
+      </div>
+    )
   }
 }
 
