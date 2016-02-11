@@ -4,8 +4,8 @@
   "description": "it's a real sweet app",
   "main": "index.js",
   "scripts": {
-    "start": "budo . -d -t babelify --serve bundle.js --live",
-    "build": "browserify . -t babelify -o bundle.js -g uglifyify",
+    "start": "budo ./index.jsx -t babelify -d --serve bundle.js --live",
+    "build": "browserify ./index.jsx -t babelify -o bundle.js -g uglifyify",
     "test": "browserify test.js | smokestack | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
