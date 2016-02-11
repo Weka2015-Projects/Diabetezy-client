@@ -7,7 +7,7 @@ class Diary extends Component {
     return (
       <div>
       <div>
-        <Link to={`/`}>Home</Link>
+        <Link to={`/home`}>Home</Link>
       </div>
         <div>Diary</div>
       </div>
