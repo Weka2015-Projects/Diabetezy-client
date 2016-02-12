@@ -8,5 +8,22 @@ div {
 
 #main {
   background-color: powderblue;
+}
 
+.day{
+  border: 1px solid #eee;
+  float: left;
+  font-style: Helvetica;
+  font-size: 14;
+  height: 48px;
+  line-height: 50px;
+  width: 48px;
+}
+#calendar{
+	width: 210px;
+	height: 210px;
+}
+#month{
+	width: 350px;
+	height: 210px;
 }

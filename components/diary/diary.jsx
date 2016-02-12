@@ -1,17 +1,18 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
+import Calendar from './calendar.jsx'
 
 class Diary extends Component {
 
   render() {
-    return (
-      <div>
+    return <div className="main">
       <div>
         <Link to={`/home`}>Home</Link>
       </div>
-        <div>Diary</div>
+      <div id="calendar">
+      <Calendar />
       </div>
-    )
+    </div>
   }
 }
 

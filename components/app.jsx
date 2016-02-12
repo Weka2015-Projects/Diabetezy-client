@@ -5,7 +5,7 @@ class App extends Component{
 	render() {
 		return (
 			<div>
-				<div id='main'>{routes}</div>
+				<div className='main'>{routes}</div>
 			</div>
 		)
 	}
