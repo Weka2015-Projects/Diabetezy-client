@@ -4,11 +4,22 @@ import Day from './days.jsx'
 class Calendar extends Component {
     
   render() {
-    let month = new Array(31).fill('').map((_, idx) => { return <Day key={idx} index={idx}/>
+    let february = new Array(29).fill("x").map((_, idx) => {
+      return <Day key={idx} index={idx} fill="bfhg" /*fill found in props*//>
   })
+
+    console.log(february)
     return <div id="month">
-      <h1>Month yo</h1>
-      {month}
+    <div>
+      <select>
+        <option value="december">December</option>
+        <option value="january">January</option>
+        <option value="february">February</option>
+        </select>
+        </div>
+        <div>
+        {february}
+      </div>
       </div>
   }
 }

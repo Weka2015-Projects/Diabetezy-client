@@ -1,13 +1,20 @@
-main {
+.top-main{
   text-align: center;
-}
+  margin: auto;
+  background-color: lightblue;
+  width: 50%;
+  height:20%;
+  padding-top: 10px;
 
-div {
+}
+.main {
   text-align: center;
-}
-
-#main {
-  background-color: powderblue;
+  margin: auto;
+  background-color: lightblue;
+  width: 50%;
+  height:600px;
+  padding-top: 10px;
+  position: relative;
 }
 
 .day{
@@ -18,12 +25,23 @@ div {
   height: 48px;
   line-height: 50px;
   width: 48px;
+  margin: auto;
 }
 #calendar{
-	width: 210px;
-	height: 210px;
+	position: absolute;
 }
 #month{
 	width: 350px;
 	height: 210px;
+	margin: auto;
+	position: center;
+
+}
+
+select{
+margin: 10px;
+}
+
+h1{
+	font-family: Arial;
 }

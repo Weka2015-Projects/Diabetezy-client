@@ -4,11 +4,11 @@ import $ from 'jquery'
 class Day extends Component {
 
 	handleClick() {
-		console.log(this.props.index)
+  console.log("clicked")
 	}
 
 	render() {
-		return <div className="day" onClick={this.handleClick.bind(this)}>{this.props.index + 1}</div>
+		return <div className="day" onClick={this.handleClick.bind(this)}>{this.props.index+1}</div>
 	}
 }
 
