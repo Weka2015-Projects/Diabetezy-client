@@ -10,3 +10,15 @@ div {
   background-color: powderblue;
 
 }
+
+
+
+.minutes {
+  display: inline-block;
+  width: 50%;
+}
+
+.hours {
+  display: inline-block;
+  width: 50%;
+}
