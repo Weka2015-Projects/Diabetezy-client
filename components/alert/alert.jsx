@@ -8,7 +8,6 @@ class Alert extends Component {
       <div>
         <Link to={`/home`}>Home</Link>
         <div><Link to={`/createAlert`}>Create Alert</Link></div>
-
      </div>
     )
   }
