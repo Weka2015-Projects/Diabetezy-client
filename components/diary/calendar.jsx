@@ -5,13 +5,14 @@ class Calendar extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        month: new Array(31).fill((new Array(4)).fill({time: "noon", blood_sugar_level: "7"}))
+        month: new Array(31).fill((new Array(4)).fill({time: "", blood_sugar_level: "7"}))
       }
     }
 
   printTest(idx) {
     console.log("month", this.state.month)
     console.log("days", this.state.month[1][0].time)
+    console.log
     // idx === 29 ?
     //   console.log(`Day ${idx+1} clicked mofos`) :
     // idx === 5 ?
