@@ -28,7 +28,7 @@ class CreateAlert extends Component {
     this.setState(this.state)
   }
 
-  handleIncrease() {
+  handleMinIncrease() {
     this.state.counter2 ++
     if (this.state.counter2 >= 60) {
       this.state.counter2 = 0
@@ -36,7 +36,7 @@ class CreateAlert extends Component {
     this.setState(this.state)
   }
 
-  handleDecrease() {
+  handleMinDecrease() {
     this.state.counter2 --
     if (this.state.counter2 < 0) {
       this.state.counter2 = 59
@@ -75,9 +75,9 @@ class CreateAlert extends Component {
         </div>
 
         <div className="minutes">
-          <button onClick={this.handleIncrease.bind(this)}>++</button>
+          <button onClick={this.handleMinIncrease.bind(this)}>++</button>
           <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
-          <button onClick={this.handleDecrease.bind(this)}>--</button>
+          <button onClick={this.handleMinDecrease.bind(this)}>--</button>
         </div>
 
         <div className="buttons">
