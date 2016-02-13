@@ -6,7 +6,6 @@ class Calendar extends Component {
       super(props)
 
       this.state = {
-        // month: new Array(3).fill({date: "No test on this date", time: "No test taken at this time", test: "No test taken"})
         month: [ {blood_sugar_level: "No test taken", time: "No test taken", date: '1'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "2"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "3"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '4'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "5"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "6"},
         {blood_sugar_level: "No test taken", time: "No test taken", date: '7'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "8"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "9"} ,{blood_sugar_level: "No test taken", time: "No test taken", date: '10'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "11"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "12"},
         {blood_sugar_level: "No test taken", time: "No test taken", date: '13'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "14"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "15"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '16'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "17"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "18"},
@@ -17,18 +16,30 @@ class Calendar extends Component {
       }
     }
  
-  // console.log("day 1", this.state.month[1])
-
   printTest(idx) {
 
-    /*tests
-    console.log(idx + 1, this.state.month)
-    console.log(idx + 1, this.state.month[idx])
-    console.log(idx + 1, this.state.month[idx].date = "9")
-    console.log(idx + 1, this.state.month)*/
+    $('#inputs').css('display', 'block')
 
-    $('.test').css('display', 'active')
+    var date = document.getElementById('date')
+    var time = document.getElementById('time')
+    var bsl = document.getElementById('bsl')
 
+    return date.innerHTML = this.state.month[idx].date,
+           time.innerHTML = this.state.month[idx].time,
+           bsl.innerHTML = this.state.month[idx].blood_sugar_level
+           
+    // TESTS:
+    // console.log(idx + 1, this.state.month)
+    // console.log("Display index number +1 to match date value",
+    // idx + 1, this.state.month[idx][0], this.state.month[idx].date)
+    // console.log("Expect date to change at clicked index",
+    // idx + 1, this.state.month[idx].date = "9")
+    // console.log("Expect time value to change at clicked index", 
+    // idx + 1, this.state.month[idx].time = "18:00")
+    // console.log("Expect b_s_l to change at clicked index", 
+    // idx + 1, this.state.month[idx].blood_sugar_level = "9.0")
+    // console.log("Expect object at clicked index to have changed, and all others 
+      // to remain the same", idx + 1, this.state.month)
   }
 
   render() {
@@ -47,11 +58,19 @@ class Calendar extends Component {
         </div>
         <div id="change record">
           {month}
-          <input className="test" placeholder="Enter your test result" type="text"></input>
-          <input className="test" placeholder="Enter your test result" type="text"></input>
-          <input className="test" placeholder="Enter your test result" type="text"></input>
-          <button type="submit" className="test">Save Result</button>
-      </div>
+          <div id="inputs">
+            <input className="test" ref="blood_sugar_level" placeholder="Enter your test result" type="text"></input>
+            <input className="test" ref="time" placeholder="Enter your test result" type="text"></input>
+            <input className="test" ref="date" placeholder="Enter your test result" type="text"></input>
+            <button /*onClick={this.handleClick.bind(this)}*/>Save Result</button>
+            <p className="results">
+            Date: <span id="date"></span><br/>
+            Blood Sugar Level: <span id="bsl"></span><br/>
+            Time: <span id="time"></span><br/>
+            </p>
+
+          </div>
+        </div>
       </div>
   }
 }
