@@ -64,7 +64,7 @@ class Calendar extends Component {
             <input className="test" ref="date" placeholder="Enter your test result" type="text"></input>
             <button /*onClick={this.handleClick.bind(this)}*/>Save Result</button>
             <p className="results">
-            Date: <span id="date"></span><br/>
+            Date: <span id="date"></span>/{}/{new Date().getFullYear()}<br/>
             Blood Sugar Level: <span id="bsl"></span><br/>
             Time: <span id="time"></span><br/>
             </p>
