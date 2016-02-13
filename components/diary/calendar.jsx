@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Day from './days.jsx'
-import $ from 'jQuery'
+import $ from 'jquery'
 class Calendar extends Component {
     constructor(props) {
       super(props)
