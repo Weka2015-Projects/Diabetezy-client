@@ -12,8 +12,15 @@ class CreateAlert extends Component {
       <div>
       <Link to={`/home`}>Home</Link>
       <div><Link to={`/alert`}>Back</Link></div>
-      <AlarmDigit numberSystem={24} ref="hourDigit" />
-      <AlarmDigit numberSystem={60} ref="minDigit" />      
+
+        <div className="hours">
+          <AlarmDigit numberSystem={24} ref="hourDigit" />
+        </div>
+
+        <div className="minutes">
+          <AlarmDigit numberSystem={60} ref="minuteDigit" />
+        </div>
+
       </div>
       )
     }
