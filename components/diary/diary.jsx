@@ -5,6 +5,7 @@ import Calendar from './calendar.jsx'
 class Diary extends Component {
 
   render() {
+
     return <div className="main">
       <div>
         <Link to={`/home`}>Home</Link>
