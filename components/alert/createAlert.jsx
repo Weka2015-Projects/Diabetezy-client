@@ -12,55 +12,55 @@ class CreateAlert extends Component {
     }
   }
 
-  handleHrIncrease() {
+  handleHrIncrease = () => {
     this.state.counter1 ++
     if (this.state.counter1 >= 24) {
       this.state.counter1 = 0
     }
     this.setState(this.state)
-  }
+  };
 
-  handleHrDecrease() {
+  handleHrDecrease = () => {
     this.state.counter1 --
     if (this.state.counter1 < 0) {
       this.state.counter1 = 23
     }
     this.setState(this.state)
-  }
+  };
 
-  handleMinIncrease() {
+  handleMinIncrease = () => {
     this.state.counter2 ++
     if (this.state.counter2 >= 60) {
       this.state.counter2 = 0
     }
     this.setState(this.state)
-  }
+  };
 
-  handleMinDecrease() {
+  handleMinDecrease = () => {
     this.state.counter2 --
     if (this.state.counter2 < 0) {
       this.state.counter2 = 59
     }
     this.setState(this.state)
-  }
+  };
 
-  saveButton(){
+  saveButton = () => {
     let timeHr = document.getElementsByTagName("p")[0].innerHTML
     let timeMin = document.getElementsByTagName("p")[1].innerHTML
     let time = timeHr + ' : ' + timeMin
     console.log(time)
-    //post to firebase
-  }
+    //post alert to firebase
+  };
 
-  cancelButton(){
-    console.log("hi")
+  cancelButton = () => {
+    console.log("cancel")
     //redirect to alert page
-  }
+  };
 
-  deleteButton(){
-    console.log("hi")
-    //delete alert
-  }
+  deleteButton = () => {
+    console.log("delete")
+    //delete alert from firebase
+  };
 
   render() {
     return(
@@ -69,15 +69,15 @@ class CreateAlert extends Component {
       <div><Link to={`/alert`}>Back</Link></div>
 
         <div id="hours" className="hours">
-          <button onClick={this.handleHrIncrease.bind(this)}>++</button>
+          <button onClick={this.handleHrIncrease}>++</button>
           <AlarmDigit counterVal={this.state.counter1} ref="hourDigit" />
-          <button onClick={this.handleHrDecrease.bind(this)}>--</button>
+          <button onClick={this.handleHrDecrease}>--</button>
         </div>
 
         <div className="minutes">
-          <button onClick={this.handleMinIncrease.bind(this)}>++</button>
+          <button onClick={this.handleMinIncrease}>++</button>
           <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
-          <button onClick={this.handleMinDecrease.bind(this)}>--</button>
+          <button onClick={this.handleMinDecrease}>--</button>
         </div>
 
         <div className="buttons">

@@ -5,6 +5,7 @@ class AlarmDigit extends Component {
     super()
   }
 
+
   render() {
     return(
       <div>
