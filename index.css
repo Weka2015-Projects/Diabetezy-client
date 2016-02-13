@@ -45,3 +45,6 @@ margin: 10px;
 h1{
 	font-family: Arial;
 }
+.test{
+  display: none;
+}

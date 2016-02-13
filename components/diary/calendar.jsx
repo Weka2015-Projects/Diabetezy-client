@@ -1,18 +1,18 @@
 import React, {Component} from 'react'
 import Day from './days.jsx'
-
+import $ from 'jQuery'
 class Calendar extends Component {
     constructor(props) {
       super(props)
 
       this.state = {
         // month: new Array(3).fill({date: "No test on this date", time: "No test taken at this time", test: "No test taken"})
-        month: [ {date: '1'} ,{date: "2"} ,{date : "3"}, {date: '4'} ,{date: "5"} ,{date : "6"},
-        {date: '7'} ,{date: "8"} ,{date : "9"} ,{date: '10'} ,{date: "11"} ,{date : "12"},
-        {date: '13'} ,{date: "14"} ,{date : "15"}, {date: '16'} ,{date: "17"} ,{date : "18"},
-        {date: '19'} ,{date: "20"} ,{date : "21"}, {date: '22'} ,{date: "23"} ,{date : "24"},
-        {date: '25'} ,{date: "26"} ,{date : "27"}, {date: '28'} ,{date: "29"} ,{date : "30"},
-        {date: '31'} 
+        month: [ {blood_sugar_level: "No test taken", time: "No test taken", date: '1'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "2"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "3"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '4'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "5"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "6"},
+        {blood_sugar_level: "No test taken", time: "No test taken", date: '7'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "8"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "9"} ,{blood_sugar_level: "No test taken", time: "No test taken", date: '10'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "11"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "12"},
+        {blood_sugar_level: "No test taken", time: "No test taken", date: '13'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "14"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "15"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '16'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "17"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "18"},
+        {blood_sugar_level: "No test taken", time: "No test taken", date: '19'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "20"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "21"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '22'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "23"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "24"},
+        {blood_sugar_level: "No test taken", time: "No test taken", date: '25'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "26"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "27"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '28'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "29"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "30"},
+        {blood_sugar_level: "No test taken", time: "No test taken", date: '31'} 
         ]
       }
     }
@@ -20,20 +20,14 @@ class Calendar extends Component {
   // console.log("day 1", this.state.month[1])
 
   printTest(idx) {
+
+    /*tests
     console.log(idx + 1, this.state.month)
     console.log(idx + 1, this.state.month[idx])
     console.log(idx + 1, this.state.month[idx].date = "9")
-    console.log(idx + 1, this.state.month)
+    console.log(idx + 1, this.state.month)*/
 
-
-
-    // idx === 29 ?
-    //   console.log(`Day ${idx+1} clicked mofos`) :
-    // idx === 5 ?
-    //   console.log(`Day ${idx+1} clicked yay`) :
-    // idx === 10 ?
-    //   console.log(`Day ${idx+1} oaisdhf`) :
-    //   console.log(`fro`)
+    $('.test').css('display', 'active')
 
   }
 
@@ -51,8 +45,12 @@ class Calendar extends Component {
         <option value="february">February</option>
         </select>
         </div>
-        <div id="katie">
-        {month}
+        <div id="change record">
+          {month}
+          <input className="test" placeholder="Enter your test result" type="text"></input>
+          <input className="test" placeholder="Enter your test result" type="text"></input>
+          <input className="test" placeholder="Enter your test result" type="text"></input>
+          <button type="submit" className="test">Save Result</button>
       </div>
       </div>
   }

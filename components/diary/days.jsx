@@ -1,16 +1,11 @@
 import React, {Component} from 'react'
+import $ from 'jquery'
 
 class Day extends Component {
 
 	handleClick() {
 	this.props.clickCb(this.props.index)
 	}
-
-	Tests(test, bsl, day){
-        this.test = test
-        this.bsl = bsl
-        this.day = day
-      }
 
 	render() {
 		return <div className="day" onClick={this.handleClick.bind(this)}>{this.props.index+1}</div>
