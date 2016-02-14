@@ -8,9 +8,14 @@ class CreateAlert extends Component {
 
     this.state = {
       counter1: 1,
-      counter2: 2
+      counter2: 2,
+      times: [{time: '1310'}]
+
     }
   }
+
+
+
 
   handleHrIncrease = () => {
     this.state.counter1 ++
@@ -44,16 +49,22 @@ class CreateAlert extends Component {
     this.setState(this.state)
   };
 
+
   saveButton = () => {
-    let timeHr = document.getElementsByTagName("p")[0].innerHTML
-    let timeMin = document.getElementsByTagName("p")[1].innerHTML
-    let time = timeHr + ' : ' + timeMin
+    let timeHr = this.state.counter1
+    let timeMin = this.state.counter2
+    timeHr = (timeHr < 10) ? '0' + timeHr.toString() : timeHr.toString()
+    timeMin = (timeMin < 10) ? '0' + timeMin.toString() : timeMin.toString()
+    let time = timeHr + timeMin
     console.log(time)
     //post alert to firebase
   };
 
   cancelButton = () => {
-    console.log("cancel")
+    let gub = this.state.times[0].time
+    let gubgub = (this.state.counter1 = parseInt(gub.substring(0,2)))
+    let gubgubgub =(this.state.counter2 = parseInt(gub.substring(2,4)))
+    this.setState(this.state)
     //redirect to alert page
   };
 
