@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
 import AlarmDigit from './alarmDigit.jsx'
+import moment from 'moment'
 
 class CreateAlert extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ class CreateAlert extends Component {
     this.state = {
       counter1: 1,
       counter2: 2,
-      times: [{time: '1310'}]
+      times: [{time: "0715"}]
 
     }
   }
@@ -55,8 +56,9 @@ class CreateAlert extends Component {
     let timeMin = this.state.counter2
     timeHr = (timeHr < 10) ? '0' + timeHr.toString() : timeHr.toString()
     timeMin = (timeMin < 10) ? '0' + timeMin.toString() : timeMin.toString()
-    let time = timeHr + timeMin
+    let time = moment(timeHr + timeMin, "hmm").format("HH:mm")
     console.log(time)
+
     //post alert to firebase
   };
 
