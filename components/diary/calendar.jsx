@@ -1,6 +1,35 @@
 import React, {Component} from 'react'
 import Day from './days.jsx'
 import $ from 'jquery'
+import {users} from '../../test-data.json'
+
+
+// var testdata = []
+
+const dataForMonth = () => {
+  var testdata = []
+  for(var i = 0; i < (users[0].tests).length; i++) {
+  var katie = users[0].tests[i].timestamp
+  testdata.push(katie)
+}
+console.log(testdata)
+ testdata.sort()
+ return testdata[0][testdata.length -1]
+  // find the value of each timestamp
+  // then push the value to a new array
+  //   filter to find the lowest and highest timestamp value stored in the array
+  //   find which test matches this timestamp
+
+    }
+//    find timestamp at beginning of Month
+//    find timestamp at end of Month
+//    include test if it is between 
+//  return results
+// }
+
+// const dataForDay = (day) => {
+
+// }
 
 class Calendar extends Component {
     constructor(props) {
@@ -19,8 +48,12 @@ class Calendar extends Component {
  
   printTest(idx) {
     console.log(date)
+    console.log(dataForMonth(users))
+    console.log((users[0].tests).length)
+    console.log(users[0].tests[0].timestamp)
 
     $('#inputs').css('display', 'block')
+
    date.innerHTML = this.state.month[idx].date,
    time.innerHTML = this.state.month[idx].time,
    bsl.innerHTML = this.state.month[idx].blood_sugar_level     
@@ -38,9 +71,14 @@ class Calendar extends Component {
       // to remain the same", idx + 1, this.state.month)
   }
 
-  addTestToDayObject() {
+  addTestToDayObject(idx) {
     console.log("button pressed")
-    var test = input.ref('blood_sugar_level').val
+    var time = this.refs.time.value
+    this.refs.time.value = ''
+
+    this.setState ({
+      month: (idx, time: time)
+    })
   }
 
   render() {
@@ -68,9 +106,9 @@ class Calendar extends Component {
         <label>Blood Test Result:</label>
         <input className="test" ref="blood_sugar_level" type="number"></input><br/>
         <label>Time:</label>
-        <input className="test" ref="time" type="time"></input><br/>
+        <input className="test" ref="time" type="number"></input><br/>
 
-        <button onClick={this.addTestToDayObject}>Save Result</button>
+        <button onClick={this.addTestToDayObject.bind(this)}>Save Result</button>
 
         <p className="results">
           Date: <span id="date"></span>/MONTH/{new Date().getFullYear()}<br/>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-import {Line as LineChart} from 'react-chartjs';
+import {Line as LineChart} from 'react-chart.js';
 
 function chartData() {
   return {
