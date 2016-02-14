@@ -8,7 +8,7 @@ class CreateAlert extends Component {
     super(props)
 
     this.state = {
-      counter1: 1,
+      counter1: 11,
       counter2: 2,
       times: [{time: "0715"}]
 
