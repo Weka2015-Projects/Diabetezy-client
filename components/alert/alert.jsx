@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
+import {users} from '../../test-data.json'
 
+console.log(users[0].alerts[0])
 
 class Alert extends Component {
   constructor(props) {

@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
+import {users} from '../../test-data.json'
+
+console.log(users[0].alerts[0])
 
 class CreateAlert extends Component {
   constructor(props){
@@ -11,12 +14,8 @@ class CreateAlert extends Component {
       counter1: 11,
       counter2: 2,
       times: [{time: "0715"}]
-
     }
   }
-
-
-
 
   handleHrIncrease = () => {
     this.state.counter1 ++
