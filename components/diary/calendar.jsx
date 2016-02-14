@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Day from './days.jsx'
 import $ from 'jquery'
+
 class Calendar extends Component {
     constructor(props) {
       super(props)
@@ -17,17 +18,12 @@ class Calendar extends Component {
     }
  
   printTest(idx) {
+    console.log(date)
 
     $('#inputs').css('display', 'block')
-
-    var date = document.getElementById('date')
-    var time = document.getElementById('time')
-    var bsl = document.getElementById('bsl')
-
-    return date.innerHTML = this.state.month[idx].date,
-           time.innerHTML = this.state.month[idx].time,
-           bsl.innerHTML = this.state.month[idx].blood_sugar_level
-           
+   date.innerHTML = this.state.month[idx].date,
+   time.innerHTML = this.state.month[idx].time,
+   bsl.innerHTML = this.state.month[idx].blood_sugar_level     
     // TESTS:
     // console.log(idx + 1, this.state.month)
     // console.log("Display index number +1 to match date value",
@@ -42,6 +38,11 @@ class Calendar extends Component {
       // to remain the same", idx + 1, this.state.month)
   }
 
+  addTestToDayObject() {
+    console.log("button pressed")
+    var test = input.ref('blood_sugar_level').val
+  }
+
   render() {
     
     let month = this.state.month.map((_,idx) => {
@@ -49,45 +50,36 @@ class Calendar extends Component {
   })
 
     return <div id="month">
-    <div>
-      <select>
-        <option value="december">December</option>
-        <option value="january">January</option>
-        <option value="february">February</option>
-        </select>
-        </div>
-        <div id="change record">
-          {month}
-          <div id="inputs">
-            <input className="test" ref="blood_sugar_level" placeholder="Enter your test result" type="text"></input>
-            <input className="test" ref="time" placeholder="Enter your test result" type="text"></input>
-            <input className="test" ref="date" placeholder="Enter your test result" type="text"></input>
-            <button /*onClick={this.handleClick.bind(this)}*/>Save Result</button>
-            <p className="results">
-            Date: <span id="date"></span>/{}/{new Date().getFullYear()}<br/>
-            Blood Sugar Level: <span id="bsl"></span><br/>
-            Time: <span id="time"></span><br/>
-            </p>
 
-          </div>
-        </div>
+      <div>
+        <select>
+          <option value="december">December</option>
+          <option value="january">January</option>
+          <option value="february">February</option>
+        </select>
       </div>
+
+      <div id="change-record">
+        {month}
+      </div>
+
+      <div id="inputs">
+
+        <label>Blood Test Result:</label>
+        <input className="test" ref="blood_sugar_level" type="number"></input><br/>
+        <label>Time:</label>
+        <input className="test" ref="time" type="time"></input><br/>
+
+        <button onClick={this.addTestToDayObject}>Save Result</button>
+
+        <p className="results">
+          Date: <span id="date"></span>/MONTH/{new Date().getFullYear()}<br/>
+          Blood Sugar Level: <span id="bsl"></span><br/>
+          Time: <span id="time"></span><br/>
+        </p>
+      </div>
+    </div>
   }
 }
-// function mapStateToProps(state) {
-//   return {
-//     tests: state.get('tests')
-//   };
-// }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     addToDay: (id) => { 
-//       dispatch({
-//         type: 'ADD_TEST_TO_CART',
-//         id: parseInt(id)
-//       })
-//     }
-//   }
-// }
 export default Calendar

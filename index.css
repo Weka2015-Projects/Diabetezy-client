@@ -47,4 +47,13 @@ h1{
 }
 #inputs{
   display: none;
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+}
+.results {
+  text-align: left;
+}
+.change-report {
+  position: relative;
 }
