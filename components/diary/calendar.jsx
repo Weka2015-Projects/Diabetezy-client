@@ -6,28 +6,25 @@ import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 import {List} from 'immutable'
 
-var testdata = []
-
-// const allDataInUserObject = () => {
-
-//   for(var i = 0; i < (users[0].tests).length; i++) {
-//     var katie = users[0].tests[i].timestamp
-//     testdata.push(katie)
-//   }
-//   testdata.sort()
-//   return testdata
-// }
-
-
 class Calendar extends Component {
 
   constructor(props){
     super(props) 
     
-    this.state = {selectedDaysTests: List()}
+    this.state = {
+      currentYear: moment().format('YYYY'),
+      currentMonth: moment().format('M'),
+      currentDay: moment().format('D'),
+      currentTime: moment().format('HH:mm'),
+    }
   }
 
-  testsInSelectedDay() {
+  selectedDay() {
+    var timestring = `${this.state.currentYear}-${this.state.currentMonth}-${this.state.currentDay} ${this.state.currentTime}`
+    return moment(timestring)
+  }
+
+  testsOnSelectedDay() {
     var currentDay = this.selectedDay()
     var start = currentDay.startOf('day').unix()
     var end = currentDay.endOf('day').unix()
@@ -35,68 +32,48 @@ class Calendar extends Component {
     return this.props.tests.filter((test) => {
       var timestamp = test.get('timestamp')
       return timestamp < end && timestamp > start
-    // })
-    // for(var i = 0; i < (users[0].tests).length; i++) {
-    // var katie = users[0].tests[i].timestamp
-    // if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
-    //   testdata.push(katie)
     })
-}
-
-  printTest(idx) {
-  this.state.currentday = idx + 1
-  $('#inputs').css('display', 'block')
-  var currentDay = this.selectedDay()
-  var tests = this.testsInSelectedDay()
-  this.setState({selectedDaysTests: tests})
-   // date.innerHTML = this.state.month[idx].date,
-
-   // time.innerHTML = this.state.month[idx].time,
-   // bsl.innerHTML = this.state.month[idx].value     
-    // TESTS:
-    // console.log(idx + 1, this.state.month)
-    // console.log("Display index number +1 to match date value",
-    // idx + 1, this.state.month[idx][0], this.state.month[idx].date)
-    // console.log("Expect date to change at clicked index",
-    // idx + 1, this.state.month[idx].date = "9")
-    // console.log("Expect time value to change at clicked index", 
-    // idx + 1, this.state.month[idx].time = "18:00")
-    // console.log("Expect b_s_l to change at clicked index", 
-    // idx + 1, this.state.month[idx].value = "9.0")
-    // console.log("Expect object at clicked index to have changed, and all others 
-      // to remain the same", idx + 1, this.state.month)
   }
 
-  selectedDay() {
-    var time = this.refs.time.value
-    return moment(`${this.refs.currentYear.value}-${this.refs.currentMonth.value}-${this.state.currentday} ${time}`)
-  }
-
-  addTestToDayObject(idx) {
+  createTest() {
     const timestamp = this.selectedDay().unix()
     this.props.saveNewTest(timestamp, this.refs.test_value.value)
   }
 
-  render() {
-    console.log(this.props.tests.last().get('timestamp'))
-    var month = []
-    for(var idx = 0; idx < 31; idx++){
-      month.push(<Day key={idx} index={idx} clickCb={this.printTest.bind(this)}/>)
-    }
-    var selectedDaysTests = this.state.selectedDaysTests.map((test) => {
-      return <div>value: {test.get('value')}</div>
+  printTest(dayNum) {
+    this.setState({currentDay: dayNum+1})
+    $('#inputs').css('display', 'block')
+  }
 
+  saveMonth(e) {
+    this.setState({currentMonth: e.target.value})
+  }
+
+  saveYear(e) {
+    this.setState({currentYear: e.target.value})
+  }
+
+  saveTime(e) {
+    this.setState({currentTime: e.target.value})
+  }
+
+  render() {
+    var month = []
+    for(var dayNum = 0; dayNum < 31; dayNum++){
+      month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
+    }
+    var visibleTests = this.testsOnSelectedDay().map((test) => {
+      return <div key={'test_' + test.get('id')}>value: {test.get('value')}</div>
     })
 
     return <div id="month">
-
       <div>
-        <select ref="currentMonth">
+        <select value={this.state.currentMonth} onChange={this.saveMonth.bind(this)}>
           <option value="12">December</option>
           <option value="1">January</option>
           <option value="2">February</option>
         </select>
-          <select ref="currentYear">
+          <select value={this.state.currentYear} onChange={this.saveYear.bind(this)}>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
         </select>
@@ -105,16 +82,15 @@ class Calendar extends Component {
         {month}
       </div>
       <div id="inputs">
-
         <label>Blood Test Result:</label><br/>
         <input className="test" ref="test_value" type="number"></input><br/>
         <label>Time:</label><br/>
-        <input className="test" ref="time" type="time"></input><br/>
+        <input className="test" ref="time" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)}></input><br/>
 
-        <button onClick={this.addTestToDayObject.bind(this)}>Save Result</button>
-        <p className="results">
-          {selectedDaysTests}
-        </p>
+        <button onClick={this.createTest.bind(this)}>Save Result</button>
+        <div className="results">
+          {visibleTests}
+        </div>
       </div>
     </div>
   }
