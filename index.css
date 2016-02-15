@@ -57,3 +57,16 @@ h1{
 .change-report {
   position: relative;
 }
+
+
+/* Alarm Digits */
+
+.minutes {
+  display: inline-block;
+  width: 50%;
+}
+
+.hours {
+  display: inline-block;
+  width: 50%;
+}

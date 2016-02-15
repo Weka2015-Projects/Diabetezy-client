@@ -1,23 +1,21 @@
-import {fromJS} from 'immutable'
+import {fromJS, Map} from 'immutable'
+import data from './test-data.json'
 
-const INITIAL_STATE = fromJS({
-	tests: [
-		{id: '1', day: '1', time: '10:00', blood_sugar_level: '7.6'}
-	],
-	days: {tests.id: tests.day}
-})
+const INITIAL_STATE = fromJS(data.users[0])
 
-export default (state = INITIAL_STATE, action) => {
-	switch(action.type) {
-		case 'ADD_TEST_TO_DAY':
-			return state.set('day',state.get('day').push(action.id))
-		default:
-		return state
-	}
-}
-// const reducer = (state, action) => {
-// 	let day = state.get('days')
-// 	let test_id = action.test_id
+// console.log(INITIAL_STATE.get('alerts').first().get('time'))
 
-// 	day[test_id] = (day[test_id]) ? 
-// }
+const reducer = (state = INITIAL_STATE, action) => {
+  switch(action.type) {
+    case 'CREATE_ALERT':
+      var alertMap = Map({id: 2, time: action.time})
+      return state.set('alerts', state.get('alerts').push(alertMap))
+    default:
+      return state
+  }
+} 
+export default reducer
+
+// const newState = reducer(undefined, {type: "CREATE_ALERT", time: "12:30"})
+
+// console.log("hu", newState.get('alerts').last().get('time'))

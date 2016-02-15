@@ -1,16 +1,28 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-
+import {users} from '../../test-data.json'
+import {connect} from 'react-redux'
 
 class Alert extends Component {
+
   render() {
+    let alertsArray = this.props.alerts.map((alert) => {
+      return <div key={alert.get('id')}>{alert.get('time')}</div>
+    })
     return(
       <div>
         <Link to={`/home`}>Home</Link>
-        <div>alert</div>
+        <div><Link to={`/createAlert`}>Create Alert</Link></div>
+        <div>{alertsArray}</div>
      </div>
     )
   }
 }
 
-export default Alert
+function mapStateToProps(state) {
+  return {
+    alerts: state.get('alerts')
+  }
+}
+
+export default connect(mapStateToProps)(Alert)

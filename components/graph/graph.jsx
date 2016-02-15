@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import Chart from 'c3-react'
 console.log(Chart)
+import {Line as LineChart} from 'react-chart.js';
 
 class DashboardComponent extends Component {
   render() {
