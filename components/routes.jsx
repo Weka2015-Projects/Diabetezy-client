@@ -16,5 +16,6 @@ export default (
         <Route path='/createAlert' component ={CreateAlert} />
         <Route path='/graph' component ={Graph} />
         <Route path='/diary' component ={Diary} />
+        <Route path='/alerts/:id' component ={CreateAlert} />
     </Router>
 )
