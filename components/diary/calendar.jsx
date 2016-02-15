@@ -17,14 +17,14 @@ var testdata = []
 //   return testdata
 // }
 
-// const dataForMonth = (bih) => {
-//   for(var i = 0; i < (users[0].tests).length; i++) {
-//     var katie = users[0].tests[i].timestamp
-//     if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
-//       testdata.push(katie)
-//     }
-//   } return testdata
-// }
+const dataForMonth = (bih) => {
+  for(var i = 0; i < (users[0].tests).length; i++) {
+    var katie = users[0].tests[i].timestamp
+    if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
+      testdata.push(katie)
+    }
+  } return testdata
+}
 
 
 class Calendar extends Component {
@@ -43,6 +43,7 @@ class Calendar extends Component {
     }
  
   printTest(idx) {
+  this.state.currentday = idx + 1
   $('#inputs').css('display', 'block')
   // console.log(dataForMonth(January))
    date.innerHTML = this.state.month[idx].date,
@@ -65,6 +66,9 @@ class Calendar extends Component {
   addTestToDayObject(idx) {
     console.log("button pressed")
     var time = this.refs.time.value
+    const timestamp = moment(`${this.refs.currentYear.value}-${this.refs.currentMonth.value}-${this.state.currentday} ${time}`).unix()
+    console.log(timestamp)
+    this.props.saveNewTest(timestamp, this.refs.test_value.value)
   }
 
   render() {
@@ -73,26 +77,30 @@ class Calendar extends Component {
       return <Day key={idx} index={idx} clickCb={this.printTest.bind(this)}/>
   })
 
+    console.log(this.props.tests)
+
     return <div id="month">
 
       <div>
-        <select>
-          <option value="december">December</option>
-          <option value="january">January</option>
-          <option value="february">February</option>
+        <select ref="currentMonth">
+          <option value="12">December</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+        </select>
+          <select ref="currentYear">
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
         </select>
       </div>
-
       <div id="change-record">
         {month}
       </div>
-
       <div id="inputs">
 
         <label>Blood Test Result:</label><br/>
-        <input className="test" ref="value" type="number"></input><br/>
+        <input className="test" ref="test_value" type="number"></input><br/>
         <label>Time:</label><br/>
-        <input className="test" ref="time" type="number"></input><br/>
+        <input className="test" ref="time" type="time"></input><br/>
 
         <button onClick={this.addTestToDayObject.bind(this)}>Save Result</button>
         <p className="results">
@@ -114,8 +122,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     saveNewTest: (timestamp, value) => {
-      dispatch({type: CREATE_BLOOD_TEST, timestamp: action.timestamp,
-      value: action.value})
+      dispatch({type: 'CREATE_BLOOD_TEST', timestamp: timestamp,
+      value: value})
     }
   }
 }
