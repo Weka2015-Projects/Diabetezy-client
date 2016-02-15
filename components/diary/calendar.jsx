@@ -4,7 +4,6 @@ import $ from 'jquery'
 import moment from 'moment'
 import {users} from '../../test-data.json'
 
-moment().format(X)
 var testdata = []
 
 // const allDataInUserObject = () => {
@@ -51,7 +50,6 @@ class Calendar extends Component {
     }
  
   printTest(idx) {
-    dataForMonth(January)
   $('#inputs').css('display', 'block')
 
    date.innerHTML = this.state.month[idx].date,

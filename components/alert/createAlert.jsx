@@ -3,8 +3,7 @@ import {Link} from 'react-router'
 import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {users} from '../../test-data.json'
-
-console.log(users[0].alerts[0])
+import {connect} from 'react-redux'
 
 class CreateAlert extends Component {
   constructor(props){
@@ -56,8 +55,7 @@ class CreateAlert extends Component {
     timeHr = (timeHr < 10) ? '0' + timeHr.toString() : timeHr.toString()
     timeMin = (timeMin < 10) ? '0' + timeMin.toString() : timeMin.toString()
     let time = moment(timeHr + timeMin, "hmm").format("HH:mm")
-    console.log(time)
-
+    this.props.saveNewAlert(time)
     //post alert to firebase
   };
 
@@ -104,5 +102,11 @@ class CreateAlert extends Component {
       )
     }
   }
-
-export default CreateAlert
+function mapDispatchToProps(dispatch) {
+  return {
+    saveNewAlert: (time) => {
+      dispatch({type: "CREATE_ALERT", time: time})
+    }
+  }
+}
+export default connect(undefined, mapDispatchToProps)(CreateAlert)
