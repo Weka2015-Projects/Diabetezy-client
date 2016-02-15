@@ -44,11 +44,17 @@ margin: 10px;
 h1{
 	font-family: Arial;
 }
+
 #inputs{
   display: none;
   text-align: left;
   position: absolute;
   bottom: 0;
+}
+
+input {
+  margin: 5px 0 5px 0;
+
 }
 .results {
   text-align: left;
@@ -56,7 +62,9 @@ h1{
 .change-report {
   position: relative;
 }
-
+button {
+  margin: 10px 0 10px 0;
+}
 
 /* Alarm Digits */
 

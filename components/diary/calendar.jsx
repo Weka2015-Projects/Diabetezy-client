@@ -17,45 +17,37 @@ var testdata = []
 //   return testdata
 // }
 
-const dataForMonth = (month) => {
-  for(var i = 0; i < (users[0].tests).length; i++) {
-    var katie = users[0].tests[i].timestamp
-    if((katie > moment.startOf(month)) && (katie < moment.startOf(month))){
-      testdata.push(katie)
-    }
-  } return testdata
-}
-//    find timestamp at beginning of Month
-//    find timestamp at end of Month
-//    include test if it is between 
-//  return results
+// const dataForMonth = (bih) => {
+//   for(var i = 0; i < (users[0].tests).length; i++) {
+//     var katie = users[0].tests[i].timestamp
+//     if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
+//       testdata.push(katie)
+//     }
+//   } return testdata
 // }
 
-// const dataForDay = (day) => {
-
-// }
 
 class Calendar extends Component {
     constructor(props) {
       super(props)
 
       this.state = {
-        month: [ {blood_sugar_level: "No test taken", time: "No test taken", date: '1'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "2"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "3"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '4'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "5"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "6"},
-        {blood_sugar_level: "No test taken", time: "No test taken", date: '7'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "8"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "9"} ,{blood_sugar_level: "No test taken", time: "No test taken", date: '10'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "11"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "12"},
-        {blood_sugar_level: "No test taken", time: "No test taken", date: '13'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "14"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "15"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '16'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "17"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "18"},
-        {blood_sugar_level: "No test taken", time: "No test taken", date: '19'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "20"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "21"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '22'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "23"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "24"},
-        {blood_sugar_level: "No test taken", time: "No test taken", date: '25'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "26"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "27"}, {blood_sugar_level: "No test taken", time: "No test taken", date: '28'} ,{blood_sugar_level: "No test taken", time: "No test taken", date: "29"} ,{blood_sugar_level: "No test taken", time: "No test taken", date : "30"},
-        {blood_sugar_level: "No test taken", time: "No test taken", date: '31'} 
+        month: [ {value: "No test taken", timestamp: "No test taken", date: '1'} ,{value: "No test taken", timestamp: "No test taken", date: "2"} ,{value: "No test taken", timestamp: "No test taken", date : "3"}, {value: "No test taken", timestamp: "No test taken", date: '4'} ,{value: "No test taken", timestamp: "No test taken", date: "5"} ,{value: "No test taken", timestamp: "No test taken", date : "6"},
+        {value: "No test taken", timestamp: "No test taken", date: '7'} ,{value: "No test taken", timestamp: "No test taken", date: "8"} ,{value: "No test taken", timestamp: "No test taken", date : "9"} ,{value: "No test taken", timestamp: "No test taken", date: '10'} ,{value: "No test taken", timestamp: "No test taken", date: "11"} ,{value: "No test taken", timestamp: "No test taken", date : "12"},
+        {value: "No test taken", timestamp: "No test taken", date: '13'} ,{value: "No test taken", timestamp: "No test taken", date: "14"} ,{value: "No test taken", timestamp: "No test taken", date : "15"}, {value: "No test taken", timestamp: "No test taken", date: '16'} ,{value: "No test taken", timestamp: "No test taken", date: "17"} ,{value: "No test taken", timestamp: "No test taken", date : "18"},
+        {value: "No test taken", timestamp: "No test taken", date: '19'} ,{value: "No test taken", timestamp: "No test taken", date: "20"} ,{value: "No test taken", timestamp: "No test taken", date : "21"}, {value: "No test taken", timestamp: "No test taken", date: '22'} ,{value: "No test taken", timestamp: "No test taken", date: "23"} ,{value: "No test taken", timestamp: "No test taken", date : "24"},
+        {value: "No test taken", timestamp: "No test taken", date: '25'} ,{value: "No test taken", timestamp: "No test taken", date: "26"} ,{value: "No test taken", timestamp: "No test taken", date : "27"}, {value: "No test taken", timestamp: "No test taken", date: '28'} ,{value: "No test taken", timestamp: "No test taken", date: "29"} ,{value: "No test taken", timestamp: "No test taken", date : "30"},
+        {value: "No test taken", timestamp: "No test taken", date: '31'} 
         ]
       }
     }
  
   printTest(idx) {
   $('#inputs').css('display', 'block')
-
+  // console.log(dataForMonth(January))
    date.innerHTML = this.state.month[idx].date,
    time.innerHTML = this.state.month[idx].time,
-   bsl.innerHTML = this.state.month[idx].blood_sugar_level     
+   bsl.innerHTML = this.state.month[idx].value     
     // TESTS:
     // console.log(idx + 1, this.state.month)
     // console.log("Display index number +1 to match date value",
@@ -65,7 +57,7 @@ class Calendar extends Component {
     // console.log("Expect time value to change at clicked index", 
     // idx + 1, this.state.month[idx].time = "18:00")
     // console.log("Expect b_s_l to change at clicked index", 
-    // idx + 1, this.state.month[idx].blood_sugar_level = "9.0")
+    // idx + 1, this.state.month[idx].value = "9.0")
     // console.log("Expect object at clicked index to have changed, and all others 
       // to remain the same", idx + 1, this.state.month)
   }
@@ -73,11 +65,6 @@ class Calendar extends Component {
   addTestToDayObject(idx) {
     console.log("button pressed")
     var time = this.refs.time.value
-    this.refs.time.value = ''
-
-    this.setState ({
-      month: (idx, time: time)
-    })
   }
 
   render() {
@@ -102,13 +89,12 @@ class Calendar extends Component {
 
       <div id="inputs">
 
-        <label>Blood Test Result:</label>
-        <input className="test" ref="blood_sugar_level" type="number"></input><br/>
-        <label>Time:</label>
+        <label>Blood Test Result:</label><br/>
+        <input className="test" ref="value" type="number"></input><br/>
+        <label>Time:</label><br/>
         <input className="test" ref="time" type="number"></input><br/>
 
         <button onClick={this.addTestToDayObject.bind(this)}>Save Result</button>
-
         <p className="results">
           Date: <span id="date"></span>/MONTH/{new Date().getFullYear()}<br/>
           Blood Sugar Level: <span id="bsl"></span><br/>
@@ -120,10 +106,18 @@ class Calendar extends Component {
 }
 
 function mapStateToProps(state) {
-  tests: state.get('tests')
+  return {
+    tests: state.get('tests')
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-
+  return {
+    saveNewTest: (timestamp, value) => {
+      dispatch({type: CREATE_BLOOD_TEST, timestamp: action.timestamp,
+      value: action.value})
+    }
+  }
 }
-export default Calendar
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
+
