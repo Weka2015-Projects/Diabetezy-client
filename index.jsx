@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import reducer from './reducer.js'
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-
+import {Button} from 'react-bootstrap'
 import App from './components/app.jsx'
 
 const store = createStore(reducer)

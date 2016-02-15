@@ -5,6 +5,7 @@ import moment from 'moment'
 import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 import {List} from 'immutable'
+import {Input, Button} from 'react-bootstrap'
 
 class Calendar extends Component {
 
@@ -63,7 +64,7 @@ class Calendar extends Component {
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
-      return <div key={'test_' + test.get('id')}>value: {test.get('value')}</div>
+      return <div key={'test_' + test.get('id')}>Test result: {test.get('value')} mmol /L</div>
     })
 
     return <div id="month">
@@ -82,15 +83,14 @@ class Calendar extends Component {
         {month}
       </div>
       <div id="inputs">
-        <label>Blood Test Result:</label><br/>
-        <input className="test" ref="test_value" type="number"></input><br/>
-        <label>Time:</label><br/>
-        <input className="test" ref="time" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)}></input><br/>
-
-        <button onClick={this.createTest.bind(this)}>Save Result</button>
+        <Input className="test" ref="test_value" type="number" type="text" label="Blood Test Result: "></Input><br/>
+        <Input className="test" ref="time" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} type="text" label="Time: ">
+        </Input><br/>
+      </div>
+        <Button onClick={this.createTest.bind(this)} className='btn btn-default' bsStyle="success" id="saveResult">Save Result</Button>
+      
         <div className="results">
           {visibleTests}
-        </div>
       </div>
     </div>
   }

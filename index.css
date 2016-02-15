@@ -1,21 +1,15 @@
-.top-main{
-  text-align: center;
+body {
   margin: auto;
-  background-color: lightblue;
-  width: 50%;
-  height:20%;
-  padding-top: 10px;
-
-}
-.main {
-  text-align: center;
-  margin: auto;
-  background-color: lightblue;
-  width: 50%;
-  height:600px;
+  border-radius: 14px;
+  width: 800px;
+  height: 800px;
   position: relative;
 }
-
+.navigation {
+  font-family: Helvetica;
+  font-size: 16px;
+  text-align: center;
+}
 .day{
   border: 1px solid #eee;
   float: left;
@@ -24,46 +18,31 @@
   height: 48px;
   line-height: 50px;
   width: 48px;
-  margin: auto;
 }
-#calendar{
-	position: absolute;
-}
-#month{
-	width: 350px;
-	height: 210px;
-	margin: auto;
-	position: center;
 
+#month{
+	width: 370px;
+	margin: auto;
 }
 
 select{
 margin: 10px;
+padding: 1px;
 }
 
+div {
+  text-align: center;
+  margin: 0 auto;
+
+}
 h1{
 	font-family: Arial;
+  position: relative;
+  text-align: center;
 }
 
-#inputs{
-  display: none;
-  text-align: left;
-  position: absolute;
-  bottom: 0;
-}
-
-input {
-  margin: 5px 0 5px 0;
-
-}
-.results {
-  text-align: left;
-}
 .change-report {
   position: relative;
-}
-button {
-  margin: 10px 0 10px 0;
 }
 
 /* Alarm Digits */

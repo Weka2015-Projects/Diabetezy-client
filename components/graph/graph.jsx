@@ -65,11 +65,16 @@ class BloodTestLineChart extends React.Component {
 
   render() {
     return (
+      <div>
+      <div className="navigation">
+        <Link to={`/home`}>Home</Link>
+      </div>
       <div style={styles.graphContainer}>
         <LineChart data={this.state.data}
           options={options}
           width="600" height="250"/>
 				<div className="greenZone" style={styles.safeZone}></div>
+      </div>
       </div>
     )
   }
