@@ -1,3 +1,72 @@
-main {
+.top-main{
   text-align: center;
+  margin: auto;
+  background-color: lightblue;
+  width: 50%;
+  height:20%;
+  padding-top: 10px;
+
+}
+.main {
+  text-align: center;
+  margin: auto;
+  background-color: lightblue;
+  width: 50%;
+  height:600px;
+  padding-top: 10px;
+  position: relative;
+}
+
+.day{
+  border: 1px solid #eee;
+  float: left;
+  font-style: Helvetica;
+  font-size: 14;
+  height: 48px;
+  line-height: 50px;
+  width: 48px;
+  margin: auto;
+}
+#calendar{
+	position: absolute;
+}
+#month{
+	width: 350px;
+	height: 210px;
+	margin: auto;
+	position: center;
+
+}
+
+select{
+margin: 10px;
+}
+
+h1{
+	font-family: Arial;
+}
+#inputs{
+  display: none;
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+}
+.results {
+  text-align: left;
+}
+.change-report {
+  position: relative;
+}
+
+
+/* Alarm Digits */
+
+.minutes {
+  display: inline-block;
+  width: 50%;
+}
+
+.hours {
+  display: inline-block;
+  width: 50%;
 }
