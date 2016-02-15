@@ -2,14 +2,18 @@ import {fromJS, Map} from 'immutable'
 import data from './test-data.json'
 
 const INITIAL_STATE = fromJS(data.users[0])
-
-// console.log(INITIAL_STATE.get('alerts').first().get('time'))
+let nextTestId = 11003
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'CREATE_ALERT':
       var alertMap = Map({id: 2, time: action.time})
-      return state.set('alerts', state.get('alerts').push(alertMap))
+        return state.set('alerts', state.get('alerts').push(alertMap))
+
+    case 'CREATE_BLOOD_TEST':
+      nextTestId++
+      var fuckMyLifeRn = Map({id:nextTestId, timestamp: action.timestamp, value: action.value})
+      return state.set('tests', state.get('tests').push(fuckMyLifeRn))
     default:
       return state
   }

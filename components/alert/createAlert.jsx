@@ -4,7 +4,7 @@ import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
-
+import {Button} from 'react-bootstrap'
 class CreateAlert extends Component {
   constructor(props){
     super(props)
@@ -79,21 +79,21 @@ class CreateAlert extends Component {
       <div><Link to={`/alert`}>Back</Link></div>
 
         <div id="hours" className="hours">
-          <button onClick={this.handleHrIncrease}>++</button>
+          <Button onClick={this.handleHrIncrease} className='btn btn-default' bsStyle="success">++</Button>
           <AlarmDigit counterVal={this.state.counter1} ref="hourDigit" />
-          <button onClick={this.handleHrDecrease}>--</button>
+          <Button onClick={this.handleHrDecrease} className='btn btn-default' bsStyle="success">--</Button>
         </div>
 
         <div className="minutes">
-          <button onClick={this.handleMinIncrease}>++</button>
+          <Button onClick={this.handleMinIncrease} className='btn btn-default' bsStyle="success">++</Button>
           <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
-          <button onClick={this.handleMinDecrease}>--</button>
+          <Button onClick={this.handleMinDecrease} className='btn btn-default' bsStyle="success">--</Button>
         </div>
 
         <div className="buttons">
-          <button onClick={this.saveButton}>Save</button>
-          <button onClick={this.cancelButton}>Cancel</button>
-          <button onClick={this.deleteButton}>Delete</button>
+          <Button onClick={this.saveButton} className='btn btn-default' bsStyle="success">Save</Button>
+          <Button onClick={this.cancelButton} className='btn btn-default' bsStyle="success">Cancel</Button>
+          <Button onClick={this.deleteButton} className='btn btn-default' bsStyle="success">Delete</Button>
         </div>
 
 
