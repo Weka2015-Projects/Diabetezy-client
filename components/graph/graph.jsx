@@ -9,16 +9,25 @@ import {users} from '../../test-data.json'
 
 
 
-const getChartTimeData = (data) => {
+const getChartTimeData = (user_id) => {
   var chartTimeData = []
-  for (var i=0; i<(users[0].tests).length; i++ ) {
-    chartTimeData.push(users[0].tests[i].timestamp)
+  for (var i=0; i<(users[user_id].tests).length; i++ ) {
+    chartTimeData.push(users[user_id].tests[i].timestamp)
   }
   return chartTimeData
 }
 
+const getChartValueData = (user_id) => {
+  var chartValueData = []
+  for (var i=0; i<(users[user_id].tests).length; i++ ) {
+    chartValueData.push(users[user_id].tests[i].value)
+  }
+  return chartValueData
+}
 
-console.log(getChartTimeData())
+
+console.log(getChartTimeData(0))
+console.log(getChartValueData(0))
 
 var config = {
 chart: {
@@ -29,7 +38,7 @@ chart: {
       },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-  //categories: ['1455483473654', '1455483373654', '1455483373654','Feb 2', 'Feb 3', 'Feb 4', 'Feb 5', 'Feb 6', 'Feb 7'],
+  categories: [getChartTimeData],
     type: 'datetime',
     dateTimeLabelFormats: {
               hour: '%l:%M %p'
