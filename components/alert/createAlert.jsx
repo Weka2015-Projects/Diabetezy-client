@@ -68,44 +68,44 @@ class CreateAlert extends Component {
 
   deleteButton = () => {
     console.log("delete")
+    this.props.deleteOldAlert(time)
     //delete alert from firebase
   };
 
   render() {
     return(
       <div>
-      <Link to={`/home`}>Home</Link>
-      <div><Link to={`/alert`}>Back</Link></div>
+        <Link to={`/home`}>Home</Link>
+        <div><Link to={`/alert`}>Back</Link></div>
 
-        <div id="hours" className="hours">
-          <button onClick={this.handleHrIncrease}>++</button>
-          <AlarmDigit counterVal={this.state.counter1} ref="hourDigit" />
-          <button onClick={this.handleHrDecrease}>--</button>
+          <div id="hours" className="hours">
+            <button onClick={this.handleHrIncrease}>++</button>
+            <AlarmDigit counterVal={this.state.counter1} ref="hourDigit" />
+            <button onClick={this.handleHrDecrease}>--</button>
+          </div>
+
+          <div className="minutes">
+            <button onClick={this.handleMinIncrease}>++</button>
+            <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
+            <button onClick={this.handleMinDecrease}>--</button>
+          </div>
+
+          <div className="buttons">
+            <button onClick={this.saveButton}>Save</button>
+            <button onClick={this.cancelButton}>Cancel</button>
+            <button onClick={this.deleteButton}>Delete</button>
+          </div>
         </div>
-
-        <div className="minutes">
-          <button onClick={this.handleMinIncrease}>++</button>
-          <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
-          <button onClick={this.handleMinDecrease}>--</button>
-        </div>
-
-        <div className="buttons">
-          <button onClick={this.saveButton}>Save</button>
-          <button onClick={this.cancelButton}>Cancel</button>
-          <button onClick={this.deleteButton}>Delete</button>
-        </div>
-
-
-
-      </div>
       )
     }
   }
-function mapDispatchToProps(dispatch) {
-  return {
-    saveNewAlert: (time) => {
-      dispatch({type: "CREATE_ALERT", time: time})
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      saveNewAlert: (time) => {
+        dispatch({type: "CREATE_ALERT", time: time})
+      }
     }
   }
-}
+
 export default connect(undefined, mapDispatchToProps)(CreateAlert)

@@ -18,7 +18,7 @@ class Alert extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     alerts: state.get('alerts')
   }
