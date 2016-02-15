@@ -1,26 +1,30 @@
 import React, {Component} from 'react'
 import Day from './days.jsx'
 import $ from 'jquery'
+import moment from 'moment'
 import {users} from '../../test-data.json'
 
+moment().format(X)
+var testdata = []
 
-// var testdata = []
+// const allDataInUserObject = () => {
 
-const dataForMonth = () => {
-  var testdata = []
+//   for(var i = 0; i < (users[0].tests).length; i++) {
+//     var katie = users[0].tests[i].timestamp
+//     testdata.push(katie)
+//   }
+//   testdata.sort()
+//   return testdata
+// }
+
+const dataForMonth = (month) => {
   for(var i = 0; i < (users[0].tests).length; i++) {
-  var katie = users[0].tests[i].timestamp
-  testdata.push(katie)
-}
-console.log(testdata)
- testdata.sort()
- return testdata[0][testdata.length -1]
-  // find the value of each timestamp
-  // then push the value to a new array
-  //   filter to find the lowest and highest timestamp value stored in the array
-  //   find which test matches this timestamp
-
+    var katie = users[0].tests[i].timestamp
+    if((katie > moment.startOf(month)) && (katie < moment.startOf(month))){
+      testdata.push(katie)
     }
+  } return testdata
+}
 //    find timestamp at beginning of Month
 //    find timestamp at end of Month
 //    include test if it is between 
@@ -47,12 +51,8 @@ class Calendar extends Component {
     }
  
   printTest(idx) {
-    console.log(date)
-    console.log(dataForMonth(users))
-    console.log((users[0].tests).length)
-    console.log(users[0].tests[0].timestamp)
-
-    $('#inputs').css('display', 'block')
+    dataForMonth(January)
+  $('#inputs').css('display', 'block')
 
    date.innerHTML = this.state.month[idx].date,
    time.innerHTML = this.state.month[idx].time,

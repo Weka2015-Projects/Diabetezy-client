@@ -4,52 +4,52 @@
 		"tests": [
 			{
 				"id": 1,
-				"timestamp": 1455483473654,
+				"timestamp": 1455483473,
 				"value": 16.7
 			},	
 			{
 				"id": 2,
-				"timestamp": 1455483373654,
+				"timestamp": 1455483373,
 				"value": 19.7
 			},	
 			{
 				"id": 3,
-				"timestamp": 1455483273654,
+				"timestamp": 1455483273,
 				"value": 22.7
 			},	
 			{
 				"id": 4,
-				"timestamp": 1455483263654,
+				"timestamp": 1455483263,
 				"value": 22.7
 			},	
 			{
 				"id": 5,
-				"timestamp": 1455483261654,
+				"timestamp": 1455483261,
 				"value": 22.7
 			},
 			{
 				"id": 6,
-				"timestamp": 1451606400000,
+				"timestamp": 1451606400,
 				"value": 16.7
 			},	
 			{
 				"id": 7,
-				"timestamp": 1462060800000,
+				"timestamp": 1462060800,
 				"value": 19.7
 			},	
 			{
 				"id": 8,
-				"timestamp": 1451865600000,
+				"timestamp": 1451865600,
 				"value": 22.7
 			},	
 			{
 				"id": 9,
-				"timestamp": 1453021200000,
+				"timestamp": 1453021200,
 				"value": 22.7
 			},	
 			{
 				"id": 10,
-				"timestamp": 1474102800000,
+				"timestamp": 1474102800,
 				"value": 22.7
 			}		
 		],
