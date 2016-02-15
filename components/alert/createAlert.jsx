@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {connect} from 'react-redux'
-
+import {Button} from 'react-bootstrap'
 class CreateAlert extends Component {
   constructor(props){
     super(props)
