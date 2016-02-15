@@ -60,7 +60,11 @@ class BloodTestChart extends Component {
 
 
     render() {
-      return <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
+      return (
+      <div>
+      <Link to={`/home`}>Home</Link><br/>
+      <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
+      </div>)
     }
 }
 
