@@ -27,6 +27,9 @@
   },
   "homepage": "https://github.com/michaelmcgrath/Diabetezy-client",
   "dependencies": {
+    "c3": "^0.4.10",
+    "c3-react": "^0.1.13",
+    "d3": "^3.5.15",
     "immutable": "^3.7.6",
     "jquery": "^2.2.0",
     "react": "^0.14.7",
