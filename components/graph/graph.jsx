@@ -3,20 +3,21 @@ import {Link} from 'react-router'
 import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts/bundle/highcharts'
 import {users} from '../../test-data.json'
-
-// var sevenDayChart = filter through by most recent 7 days and put values into data array
-// unix week is 604800 seconds
+import moment from 'moment'
 
 
-
+// get times from given user tests
 const getChartTimeData = (user_id) => {
   var chartTimeData = []
   for (var i=0; i<(users[user_id].tests).length; i++ ) {
-    chartTimeData.push(users[user_id].tests[i].timestamp)
+    chartTimeData.push(moment.unix(users[user_id].tests[i].timestamp).format("MM/DD/YYYY, h:mm"))
   }
   return chartTimeData
 }
 
+var chartTimes = getChartTimeData(0)
+
+// get values from given user tests
 const getChartValueData = (user_id) => {
   var chartValueData = []
   for (var i=0; i<(users[user_id].tests).length; i++ ) {
@@ -24,10 +25,11 @@ const getChartValueData = (user_id) => {
   }
   return chartValueData
 }
+var chartValues = getChartValueData(0)
 
 
-console.log(getChartTimeData(0))
-console.log(getChartValueData(0))
+console.log(chartTimes)
+console.log(chartValues)
 
 var config = {
 chart: {
@@ -38,11 +40,8 @@ chart: {
       },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-  categories: [getChartTimeData],
+  categories: chartTimes,
     type: 'datetime',
-    dateTimeLabelFormats: {
-              hour: '%l:%M %p'
-          },
            labels: { formatter: function() { return Highcharts.dateFormat('%a %d %b', this.value) }}
   },
   yAxis: {
@@ -55,7 +54,7 @@ chart: {
   legend: { enabled: false },
   series: [{
     name: 'BSL',
-    data: [12, 10.5, 10.4, 12.2, 14, 17, 13.6, 14.5, 21.4, 19.1, 9.6, 5.4]
+    data: chartValues
   }],
 }
 
