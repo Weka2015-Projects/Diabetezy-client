@@ -27,10 +27,6 @@
   },
   "homepage": "https://github.com/michaelmcgrath/Diabetezy-client",
   "dependencies": {
-    "c3": "^0.4.10",
-    "c3-react": "^0.1.13",
-    "chart.js": "^1.0.2",
-    "d3": "^3.5.15",
     "highcharts": "^4.2.3",
     "highcharts-exporting": "0.0.8",
     "highcharts-more": "0.0.8",
