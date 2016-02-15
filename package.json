@@ -28,6 +28,7 @@
   "homepage": "https://github.com/michaelmcgrath/Diabetezy-client",
   "dependencies": {
     "chart.js": "^1.0.2",
+    "firebase": "^2.4.0",
     "immutable": "^3.7.6",
     "jquery": "^2.2.0",
     "moment": "^2.11.2",
