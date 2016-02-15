@@ -67,5 +67,4 @@ class BloodTestChart extends Component {
       </div>)
     }
 }
-
 export default BloodTestChart
