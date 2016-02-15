@@ -22,6 +22,7 @@ class Calendar extends Component {
 
   selectedDay() {
     var timestring = `${this.state.currentYear}-${this.state.currentMonth}-${this.state.currentDay} ${this.state.currentTime}`
+    console.log(timestring)
     return moment(timestring)
   }
 
@@ -42,8 +43,10 @@ class Calendar extends Component {
   }
 
   printTest(dayNum) {
-    this.setState({currentDay: dayNum+1})
-    $('#inputs').css('display', 'block')
+    this.setState({currentDay: dayNum + 1})
+    $('#inputs').css('display', 'inline-block')
+    $(dayNum).css('background-color', 'green')
+
   }
 
   saveMonth(e) {
@@ -64,7 +67,10 @@ class Calendar extends Component {
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
-      return <div key={'test_' + test.get('id')}>Test result: {test.get('value')} mmol /L</div>
+      return <div>
+        <div key={'test_' + test.get('id')}>Test result: {test.get('value')} mmol /L <br/>Time of test: {test.get('timestamp')}
+        </div>
+      </div>
     })
 
     return <div id="month">
@@ -83,14 +89,14 @@ class Calendar extends Component {
         {month}
       </div>
       <div id="inputs">
-        <Input className="test" ref="test_value" type="number" type="text" label="Blood Test Result: "></Input><br/>
-        <Input className="test" ref="time" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} type="text" label="Time: ">
+        <Input className="test" ref="test_value" type="number" label="Blood Test Result: "></Input><br/>
+        <Input className="test" ref="time_value" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} label="Time: ">
         </Input><br/>
-      </div>
         <Button onClick={this.createTest.bind(this)} className='btn btn-default' bsStyle="success" id="saveResult">Save Result</Button>
-      
-        <div className="results">
-          {visibleTests}
+      </div>
+
+      <div className="results">
+        {visibleTests}
       </div>
     </div>
   }
