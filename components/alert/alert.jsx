@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 
 class Alert extends Component {

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
-import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 
 class CreateAlert extends Component {
