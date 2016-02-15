@@ -3,6 +3,7 @@ import Day from './days.jsx'
 import $ from 'jquery'
 import moment from 'moment'
 import {users} from '../../test-data.json'
+import {connect} from 'react-redux'
 
 var testdata = []
 
@@ -118,4 +119,11 @@ class Calendar extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  tests: state.get('tests')
+}
+
+function mapDispatchToProps(dispatch) {
+
+}
 export default Calendar
