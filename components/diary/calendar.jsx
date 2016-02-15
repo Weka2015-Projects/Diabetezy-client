@@ -4,6 +4,7 @@ import $ from 'jquery'
 import moment from 'moment'
 import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
+import {List} from 'immutable'
 
 var testdata = []
 
@@ -17,38 +18,41 @@ var testdata = []
 //   return testdata
 // }
 
-const dataForMonth = (bih) => {
-  for(var i = 0; i < (users[0].tests).length; i++) {
-    var katie = users[0].tests[i].timestamp
-    if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
-      testdata.push(katie)
-    }
-  } return testdata
-}
-
 
 class Calendar extends Component {
-    constructor(props) {
-      super(props)
 
-      this.state = {
-        month: [ {value: "No test taken", timestamp: "No test taken", date: '1'} ,{value: "No test taken", timestamp: "No test taken", date: "2"} ,{value: "No test taken", timestamp: "No test taken", date : "3"}, {value: "No test taken", timestamp: "No test taken", date: '4'} ,{value: "No test taken", timestamp: "No test taken", date: "5"} ,{value: "No test taken", timestamp: "No test taken", date : "6"},
-        {value: "No test taken", timestamp: "No test taken", date: '7'} ,{value: "No test taken", timestamp: "No test taken", date: "8"} ,{value: "No test taken", timestamp: "No test taken", date : "9"} ,{value: "No test taken", timestamp: "No test taken", date: '10'} ,{value: "No test taken", timestamp: "No test taken", date: "11"} ,{value: "No test taken", timestamp: "No test taken", date : "12"},
-        {value: "No test taken", timestamp: "No test taken", date: '13'} ,{value: "No test taken", timestamp: "No test taken", date: "14"} ,{value: "No test taken", timestamp: "No test taken", date : "15"}, {value: "No test taken", timestamp: "No test taken", date: '16'} ,{value: "No test taken", timestamp: "No test taken", date: "17"} ,{value: "No test taken", timestamp: "No test taken", date : "18"},
-        {value: "No test taken", timestamp: "No test taken", date: '19'} ,{value: "No test taken", timestamp: "No test taken", date: "20"} ,{value: "No test taken", timestamp: "No test taken", date : "21"}, {value: "No test taken", timestamp: "No test taken", date: '22'} ,{value: "No test taken", timestamp: "No test taken", date: "23"} ,{value: "No test taken", timestamp: "No test taken", date : "24"},
-        {value: "No test taken", timestamp: "No test taken", date: '25'} ,{value: "No test taken", timestamp: "No test taken", date: "26"} ,{value: "No test taken", timestamp: "No test taken", date : "27"}, {value: "No test taken", timestamp: "No test taken", date: '28'} ,{value: "No test taken", timestamp: "No test taken", date: "29"} ,{value: "No test taken", timestamp: "No test taken", date : "30"},
-        {value: "No test taken", timestamp: "No test taken", date: '31'} 
-        ]
-      }
-    }
- 
+  constructor(props){
+    super(props) 
+    
+    this.state = {selectedDaysTests: List()}
+  }
+
+  testsInSelectedDay() {
+    var currentDay = this.selectedDay()
+    var start = currentDay.startOf('day').unix()
+    var end = currentDay.endOf('day').unix()
+
+    return this.props.tests.filter((test) => {
+      var timestamp = test.get('timestamp')
+      return timestamp < end && timestamp > start
+    // })
+    // for(var i = 0; i < (users[0].tests).length; i++) {
+    // var katie = users[0].tests[i].timestamp
+    // if((katie > moment(bih).startOf('month')) && (katie < moment(bih).endOf('month'))){
+    //   testdata.push(katie)
+    })
+}
+
   printTest(idx) {
   this.state.currentday = idx + 1
   $('#inputs').css('display', 'block')
-  // console.log(dataForMonth(January))
-   date.innerHTML = this.state.month[idx].date,
-   time.innerHTML = this.state.month[idx].time,
-   bsl.innerHTML = this.state.month[idx].value     
+  var currentDay = this.selectedDay()
+  var tests = this.testsInSelectedDay()
+  this.setState({selectedDaysTests: tests})
+   // date.innerHTML = this.state.month[idx].date,
+
+   // time.innerHTML = this.state.month[idx].time,
+   // bsl.innerHTML = this.state.month[idx].value     
     // TESTS:
     // console.log(idx + 1, this.state.month)
     // console.log("Display index number +1 to match date value",
@@ -63,21 +67,26 @@ class Calendar extends Component {
       // to remain the same", idx + 1, this.state.month)
   }
 
-  addTestToDayObject(idx) {
-    console.log("button pressed")
+  selectedDay() {
     var time = this.refs.time.value
-    const timestamp = moment(`${this.refs.currentYear.value}-${this.refs.currentMonth.value}-${this.state.currentday} ${time}`).unix()
-    console.log(timestamp)
+    return moment(`${this.refs.currentYear.value}-${this.refs.currentMonth.value}-${this.state.currentday} ${time}`)
+  }
+
+  addTestToDayObject(idx) {
+    const timestamp = this.selectedDay().unix()
     this.props.saveNewTest(timestamp, this.refs.test_value.value)
   }
 
   render() {
-    
-    let month = this.state.month.map((_,idx) => {
-      return <Day key={idx} index={idx} clickCb={this.printTest.bind(this)}/>
-  })
+    console.log(this.props.tests.last().get('timestamp'))
+    var month = []
+    for(var idx = 0; idx < 31; idx++){
+      month.push(<Day key={idx} index={idx} clickCb={this.printTest.bind(this)}/>)
+    }
+    var selectedDaysTests = this.state.selectedDaysTests.map((test) => {
+      return <div>value: {test.get('value')}</div>
 
-    console.log(this.props.tests)
+    })
 
     return <div id="month">
 
@@ -104,9 +113,7 @@ class Calendar extends Component {
 
         <button onClick={this.addTestToDayObject.bind(this)}>Save Result</button>
         <p className="results">
-          Date: <span id="date"></span>/MONTH/{new Date().getFullYear()}<br/>
-          Blood Sugar Level: <span id="bsl"></span><br/>
-          Time: <span id="time"></span><br/>
+          {selectedDaysTests}
         </p>
       </div>
     </div>
