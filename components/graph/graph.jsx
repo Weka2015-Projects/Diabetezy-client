@@ -53,12 +53,8 @@ chart: {
   {
     name: 'BSL',
     data: []
-  },
-  {
-    name: 'Safe Range',
-    data: []
   }
-  ],
+  ]
 }
 
 
@@ -68,14 +64,15 @@ class BloodTestChart extends Component {
        let chartData = getChartData(this.props.tests).toJS()
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
-       chart.series[1].setData(chartData)
        console.log(chartData)
      }
 
     render() {
       return (
       <div>
-      <Link to={`/home`}>Home</Link><br/>
+      <Link to={`/home`}>Home |</Link>
+      <Link to={`/diary`}> Diary |</Link>
+      <Link to={`/alert`}> Alerts</Link><br/>
       <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
       </div>)
     }
