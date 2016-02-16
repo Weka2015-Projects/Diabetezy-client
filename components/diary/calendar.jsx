@@ -51,9 +51,11 @@ class Calendar extends Component {
     this.props.saveNewTest(timestamp, this.state.newTestValue)
   }
 
-  // deleteTest(test) {
-  //   this.props.deleteBloodTest(test.get('id'), test.get('timestamp'), test.get('value'))
-  // }
+  deleteTest(test) {
+    var deleteDayTest = this.testsOnSelectedDay().toJS()
+    var id = Object.keys(deleteDayTest)[0]
+    return this.props.deleteBloodTest(id)
+    }
 
   printTest(dayNum) {
     this.setState({currentDay: dayNum + 1})
@@ -139,12 +141,9 @@ function mapDispatchToProps(dispatch) {
       saveBloodTest({timestamp: timestamp, value: value}, (id) => {
         dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
       })
-    }
-    // deleteBloodTest: (id, timestamp, value) => {
-    //   deleteTest({timestamp: timestamp, value: value}, (id) => {
-    //     dispatch({type: 'DELETE_BLOOD_TEST', id: id, timestamp: timestamp, value:value})
-    //   })
-    // }
+    },
+    deleteBloodTest: (id) => 
+        dispatch({type: 'DELETE_BLOOD_TEST', id: id})
   }
 }
 
