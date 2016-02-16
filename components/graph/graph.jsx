@@ -2,34 +2,19 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts/bundle/highcharts'
-import {users} from '../../test-data.json'
 import moment from 'moment'
+import {connect} from 'react-redux'
 
 
-// get times from given user tests
-const getChartTimeData = (user_id) => {
-  var chartTimeData = []
-  for (var i=0; i<(users[user_id].tests).length; i++ ) {
-    chartTimeData.push(moment.unix(users[user_id].tests[i].timestamp).format("MM/DD/YYYY, h:mm"))
-  }
-  return chartTimeData
+const getChartData = (tests) => {
+  return tests.map(function(test) {
+    return [
+    moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
+    test.get('value')
+    ]
+  })
 }
 
-var chartTimes = getChartTimeData(0)
-
-// get values from given user tests
-const getChartValueData = (user_id) => {
-  var chartValueData = []
-  for (var i=0; i<(users[user_id].tests).length; i++ ) {
-    chartValueData.push(users[user_id].tests[i].value)
-  }
-  return chartValueData
-}
-var chartValues = getChartValueData(0)
-
-
-console.log(chartTimes)
-console.log(chartValues)
 
 var config = {
 chart: {
@@ -40,9 +25,17 @@ chart: {
       },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-  categories: chartTimes,
     type: 'datetime',
-           labels: { formatter: function() { return Highcharts.dateFormat('%a %d %b', this.value) }}
+           labels: { formatter: function() { return Highcharts.dateFormat('%a %d %b', this.value) },
+           dateTimeLabelFormats: {
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%e. %b',
+                    week: '%e. %b',
+                    month: '%b \'%y',
+                    year: '%Y'
+                }
+              }
   },
   yAxis: {
     title: {
@@ -54,7 +47,7 @@ chart: {
   legend: { enabled: false },
   series: [{
     name: 'BSL',
-    data: chartValues
+    data: []
   }],
 }
 
@@ -62,8 +55,10 @@ chart: {
 
 class BloodTestChart extends Component {
     componentDidMount() {
+       let chartData = getChartData(this.props.tests).toJS()
        let chart = this.refs.chart.getChart()
-       chart.series[0].addPoint({x: 10, y:12})
+       chart.series[0].setData(chartData)
+       console.log(chartData)
      }
 
     render() {
@@ -75,4 +70,11 @@ class BloodTestChart extends Component {
     }
 }
 
-export default BloodTestChart
+function mapStateToProps(state) {
+  return {
+    tests: state.get('tests')
+  }
+}
+
+
+export default connect(mapStateToProps)(BloodTestChart)
