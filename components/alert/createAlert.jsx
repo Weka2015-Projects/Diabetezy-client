@@ -10,42 +10,55 @@ class CreateAlert extends Component {
   constructor(props) {
     super(props)
 
-  this.state = {
-    hourCounter: 0,
-    minuteCounter: 0
-  }
+    this.state = {
+      hourCounter: 0,
+      minuteCounter: 0,
+      hourCounterLimit: 24,
+      minuteCounterLimit: 59,
+      alertTime: this.props.params.time,
+      id: this.props.params.id,
+      currentTime: moment().format('HH:mm')   
+    }
+
+    // if alert already exists do this:
+    if (this.state.alertTime || this.state.id != undefined) {
+      let alertTime = this.props.params.time
+      let splitAlertHour = (this.state.hourCounter = parseInt(alertTime.substring(0,2)))
+      let splitAlertMinute = (this.state.minuteCounter = parseInt(alertTime.substring(3,5)))
+    }  
 }
 
-  handleHrIncrease = () => {
+  handleCounterLimits = () => {
+    if (this.state.hourCounter > this.state.hourCounterLimit) { this.state.hourCounter = 0 }
+    if (this.state.hourCounter < 0) { this.state.hourCounter = this.state.hourCounterLimit }
+    if (this.state.minuteCounter > this.state.minuteCounterLimit) { this.state.minuteCounter = 0 }
+    if (this.state.minuteCounter < 0) { this.state.minuteCounter = this.state.minuteCounterLimit }
+    this.setState(this.state)
+  };
+
+  // counter increment buttons
+  handleHourIncrease = () => {
     this.state.hourCounter ++
-    if (this.state.hourCounter >= 24) {
-      this.state.hourCounter = 0
-    }
-    this.setState(this.state)
+    this.handleCounterLimits()
+    this.setState(this.state)    
   };
 
-  handleHrDecrease = () => {
+  handleHourDecrease = () => {
     this.state.hourCounter --
-    if (this.state.hourCounter < 0) {
-      this.state.hourCounter = 23
-    }
-    this.setState(this.state)
+    this.handleCounterLimits()
+    this.setState(this.state)    
   };
 
-  handleMinIncrease = () => {
+  handleMinuteIncrease = () => {
     this.state.minuteCounter ++
-    if (this.state.minuteCounter >= 60) {
-      this.state.minuteCounter = 0
-    }
-    this.setState(this.state)
+    this.handleCounterLimits()   
+    this.setState(this.state)    
   };
 
-  handleMinDecrease = () => {
+  handleMinuteDecrease = () => {
     this.state.minuteCounter --
-    if (this.state.minuteCounter < 0) {
-      this.state.minuteCounter = 59
-    }
-    this.setState(this.state)
+    this.handleCounterLimits()
+    this.setState(this.state)    
   };
 
   saveButton = () => {
@@ -67,29 +80,35 @@ class CreateAlert extends Component {
   };
 
   render() {
+    console.log(this.props)
     return(
       <div>
-        <Link to={`/home`}>Home</Link>
-        <div><Link to={`/alert`}>Back</Link></div>
-
-          <div className="hours">
-            <button onClick={this.handleHrIncrease}>++</button>
-            <AlarmDigit counterVal={this.state.hourCounter} />
-            <button onClick={this.handleHrDecrease}>--</button>
-          </div>
-
-          <div className="minutes">
-            <button onClick={this.handleMinIncrease}>++</button>
-            <AlarmDigit counterVal={this.state.minuteCounter}/>
-            <button onClick={this.handleMinDecrease}>--</button>
-          </div>
-
-          <div className="buttons">
-            <button onClick={this.saveButton}>Save</button>
-            <button onClick={this.cancelButton}>Cancel</button>
-            <button onClick={this.deleteButton}>Delete</button>
-          </div>
+        <div>
+          <Link to={`/home`}>Home</Link><br />
+          <Link to={`/alert`}>Back</Link>
         </div>
+        
+        <h2>{this.state.currentTime}</h2>
+        
+        <div className="hours">
+          <button onClick={this.handleHourIncrease}>++</button>
+            <h2>{this.state.hourCounter}</h2>
+          <button onClick={this.handleHourDecrease}>--</button>        
+        </div>
+
+        <div className="minutes">        
+          <button onClick={this.handleMinuteIncrease}>++</button>        
+            <h2>{this.state.minuteCounter}</h2>
+          <button onClick={this.handleMinuteDecrease}>--</button>        
+        </div>
+
+        <div className="buttons">
+            <button onClick={this.saveButton}>Save Time</button>
+            <button onClick={this.cancelButton}>Cancel</button>
+            <button onClick={this.deleteButton}>Delete Time</button>
+          </div>        
+
+      </div>           
       )
     }
   }
