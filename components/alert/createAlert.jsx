@@ -4,53 +4,62 @@ import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
+
 class CreateAlert extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      counter1: 11,
-      counter2: 2,
-      times: [{time: "0715"}]
+      hourCounter: 0,
+      minuteCounter: 0,
+      alertTime: this.props.params.time,
+      id: this.props.params.id
     }
-  }
+
+    // if alert already exists do this:
+    if (this.state.alertTime || this.state.id != undefined) {
+      let alertTime = this.state.alertTime
+      console.log('alertTime', alertTime)
+      let splitAlertHour = (this.state.hourCounter = parseInt(alertTime.substring(0,2)))
+      let splitAlertMinute = (this.state.minuteCounter = parseInt(alertTime.substring(3,5)))
+    }
+}
 
   handleHrIncrease = () => {
-    this.state.counter1 ++
-    if (this.state.counter1 >= 24) {
-      this.state.counter1 = 0
+    this.state.hourCounter ++
+    if (this.state.hourCounter >= 24) {
+      this.state.hourCounter = 0
     }
     this.setState(this.state)
   };
 
   handleHrDecrease = () => {
-    this.state.counter1 --
-    if (this.state.counter1 < 0) {
-      this.state.counter1 = 23
+    this.state.hourCounter --
+    if (this.state.hourCounter < 0) {
+      this.state.hourCounter = 23
     }
     this.setState(this.state)
   };
 
   handleMinIncrease = () => {
-    this.state.counter2 ++
-    if (this.state.counter2 >= 60) {
-      this.state.counter2 = 0
+    this.state.minuteCounter ++
+    if (this.state.minuteCounter >= 60) {
+      this.state.minuteCounter = 0
     }
     this.setState(this.state)
   };
 
   handleMinDecrease = () => {
-    this.state.counter2 --
-    if (this.state.counter2 < 0) {
-      this.state.counter2 = 59
+    this.state.minuteCounter --
+    if (this.state.minuteCounter < 0) {
+      this.state.minuteCounter = 59
     }
     this.setState(this.state)
   };
 
-
   saveButton = () => {
-    let timeHr = this.state.counter1
-    let timeMin = this.state.counter2
+    let timeHr = this.state.hourCounter
+    let timeMin = this.state.minuteCounter
     timeHr = (timeHr < 10) ? '0' + timeHr.toString() : timeHr.toString()
     timeMin = (timeMin < 10) ? '0' + timeMin.toString() : timeMin.toString()
     let time = moment(timeHr + timeMin, "hmm").format("HH:mm")
@@ -59,16 +68,11 @@ class CreateAlert extends Component {
   };
 
   cancelButton = () => {
-    let gub = this.state.times[0].time
-    let gubgub = (this.state.counter1 = parseInt(gub.substring(0,2)))
-    let gubgubgub =(this.state.counter2 = parseInt(gub.substring(2,4)))
-    this.setState(this.state)
-    //redirect to alert page
+    console.log('cancel')
   };
 
-  deleteButton = () => {
+  deleteButton = (time) => {
     console.log("delete")
-    this.props.deleteOldAlert(time)
     //delete alert from firebase
   };
 
@@ -78,15 +82,15 @@ class CreateAlert extends Component {
         <Link to={`/home`}>Home</Link>
         <div><Link to={`/alert`}>Back</Link></div>
 
-          <div id="hours" className="hours">
+          <div className="hours">
             <button onClick={this.handleHrIncrease}>++</button>
-            <AlarmDigit counterVal={this.state.counter1} ref="hourDigit" />
+            <AlarmDigit counterVal={this.state.hourCounter} />
             <button onClick={this.handleHrDecrease}>--</button>
           </div>
 
           <div className="minutes">
             <button onClick={this.handleMinIncrease}>++</button>
-            <AlarmDigit counterVal={this.state.counter2} ref="minuteDigit" />
+            <AlarmDigit counterVal={this.state.minuteCounter}/>
             <button onClick={this.handleMinDecrease}>--</button>
           </div>
 

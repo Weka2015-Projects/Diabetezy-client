@@ -3,7 +3,6 @@ import data from './test-data.json'
 
 const INITIAL_STATE = fromJS(data.users[0])
 let nextTestId = 11003
-
 let nextAlertId = 12091985
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -12,8 +11,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       nextAlertId++
       const alertMap = Map({id: nextAlertId, time: action.time})
       return state.set('alerts', state.get('alerts').push(alertMap))
-      var alertMap = Map({id: 2, time: action.time})
-        return state.set('alerts', state.get('alerts').push(alertMap))
 
     case 'CREATE_BLOOD_TEST':
       nextTestId++
