@@ -10,6 +10,7 @@
 }
 #bootstrap-override table{
   margin-bottom: 4px;
+  width: 100%;
 }
 .navigation {
   font-family: Helvetica;
@@ -68,6 +69,10 @@ h1{
 	font-family: Arial;
   position: relative;
   text-align: center;
+}
+#input-delete,
+#input-update {
+  width: 35%;
 }
 
 .change-report {

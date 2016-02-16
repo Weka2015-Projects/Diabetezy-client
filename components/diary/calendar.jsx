@@ -2,8 +2,7 @@
 TO DO:
   - Have individual cell light up
   - padding around elements on page
-  - ability to amend results
-  - ability to delete results
+  - tests
 */
 
 import React, {Component} from 'react'
@@ -14,7 +13,7 @@ import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 import {List, toJS} from 'immutable'
 import {Input, Button, Table} from 'react-bootstrap'
-import {saveBloodTest} from '../../firebaseWrapper'
+import {saveBloodTest, deleteBloodTest} from '../../firebaseWrapper'
 
 class Calendar extends Component {
 
@@ -53,7 +52,10 @@ class Calendar extends Component {
 
   deleteTest(test) {
     var deleteDayTest = this.testsOnSelectedDay().toJS()
+    console.log("deleteDayTest", deleteDayTest)
     var id = Object.keys(deleteDayTest)[0]
+    console.log("id", id)
+    console.log("this.props", this.props.deleteBloodTest(id))
     return this.props.deleteBloodTest(id)
     }
 
@@ -143,7 +145,7 @@ function mapDispatchToProps(dispatch) {
       })
     },
     deleteBloodTest: (id) => 
-        dispatch({type: 'DELETE_BLOOD_TEST', id: id})
+      dispatch({type: 'DELETE_BLOOD_TEST', id: id})
   }
 }
 

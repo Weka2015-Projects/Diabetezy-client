@@ -35,6 +35,15 @@ export const saveBloodTest = (action, callback) => {
     })
 }
 
+export const deleteBloodTest = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/tests/{action.id}.json?auth=${auth.token}`
+  request
+    .del(url)
+    .end((err, res) => {
+      callback(res.body.name)
+    })
+}
+
 function authDataCallback(authData) {
   if (authData) {
     auth = authData
