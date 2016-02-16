@@ -4,8 +4,8 @@ import $ from 'jquery'
 import moment from 'moment'
 import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
-import {List} from 'immutable'
-import {Input, Button} from 'react-bootstrap'
+import {List, toJS} from 'immutable'
+import {Input, Button, Table} from 'react-bootstrap'
 
 class Calendar extends Component {
 
@@ -17,6 +17,7 @@ class Calendar extends Component {
       currentMonth: moment().format('M'),
       currentDay: moment().format('D'),
       currentTime: moment().format('HH:mm'),
+      newTestValue: 0.0
     }
   }
 
@@ -39,7 +40,7 @@ class Calendar extends Component {
 
   createTest() {
     const timestamp = this.selectedDay().unix()
-    this.props.saveNewTest(timestamp, this.refs.test_value.value)
+    this.props.saveNewTest(timestamp, this.state.newTestValue)
   }
 
   printTest(dayNum) {
@@ -61,17 +62,36 @@ class Calendar extends Component {
     this.setState({currentTime: e.target.value})
   }
 
+  saveTest(e) {
+    this.setState({newTestValue: e.target.value})
+  }
+
   render() {
     var month = []
     for(var dayNum = 0; dayNum < 31; dayNum++){
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
-      return <div>
-        <div key={'test_' + test.get('id')}>Test result: {test.get('value')} mmol /L <br/>Time of test: {test.get('timestamp')}
-        </div>
-      </div>
-    })
+            console.log('test',test)
+            console.log('test.get(id)', test.toJS())
+            console.log('test.get(value)', test.get('value'))
+
+      return (
+        <Table striped hover condensed relative>
+          <thead>
+            <tr>
+              <td><strong>Blood sugar level</strong></td>
+              <td><strong>Time of test</strong></td>
+            </tr>
+          </thead>
+          <tbody>
+          <tr key={'test_' + test.get('id')}>
+            <td>{test.get('value')} mmol /L</td>
+            <td>{test.get('timestamp')}</td>
+          </tr>
+          </tbody>
+        </Table>
+    )})
 
     return <div id="month">
       <div>
@@ -89,12 +109,11 @@ class Calendar extends Component {
         {month}
       </div>
       <div id="inputs">
-        <Input className="test" ref="test_value" type="number" label="Blood Test Result: "></Input><br/>
-        <Input className="test" ref="time_value" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} label="Time: ">
+        <Input className="test" type="number" label="Blood Test Result: " value={this.state.newTestValue} onChange={this.saveTest.bind(this)}></Input><br/>
+        <Input className="test" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} label="Time: ">
         </Input><br/>
         <Button onClick={this.createTest.bind(this)} className='btn btn-default' bsStyle="success" id="saveResult">Save Result</Button>
       </div>
-
       <div className="results">
         {visibleTests}
       </div>

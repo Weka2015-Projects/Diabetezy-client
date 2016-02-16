@@ -12,8 +12,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 
     case 'CREATE_BLOOD_TEST':
       nextTestId++
-      var fuckMyLifeRn = Map({id:nextTestId, timestamp: action.timestamp, value: action.value})
-      return state.set('tests', state.get('tests').push(fuckMyLifeRn))
+      var addBloodTest = Map({id:nextTestId, timestamp: action.timestamp, value: action.value})
+      return state.set('tests', state.get('tests').push(addBloodTest))
     default:
       return state
   }

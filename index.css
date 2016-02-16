@@ -28,7 +28,7 @@ body {
   padding-top: 20px;
   display: none;
   width: 70%;
-  margin: 0;
+  margin: 0 0 20px 0;
   float: left;
   text-align: left;
 }
@@ -46,8 +46,11 @@ padding: 1px;
 div {
   text-align: center;
   margin: 0 auto;
-
 }
+.control-label{
+  text-align: left;
+}
+
 h1{
 	font-family: Arial;
   position: relative;
