@@ -4,25 +4,16 @@ import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
+import {saveAlert} from '../../firebaseWrapper'
 
 class CreateAlert extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
-    this.state = {
-      hourCounter: 0,
-      minuteCounter: 0,
-      alertTime: this.props.params.time,
-      id: this.props.params.id
-    }
-
-    // if alert already exists do this:
-    if (this.state.alertTime || this.state.id != undefined) {
-      let alertTime = this.state.alertTime
-      console.log('alertTime', alertTime)
-      let splitAlertHour = (this.state.hourCounter = parseInt(alertTime.substring(0,2)))
-      let splitAlertMinute = (this.state.minuteCounter = parseInt(alertTime.substring(3,5)))
-    }
+  this.state = {
+    hourCounter: 0,
+    minuteCounter: 0
+  }
 }
 
   handleHrIncrease = () => {
@@ -64,7 +55,6 @@ class CreateAlert extends Component {
     timeMin = (timeMin < 10) ? '0' + timeMin.toString() : timeMin.toString()
     let time = moment(timeHr + timeMin, "hmm").format("HH:mm")
     this.props.saveNewAlert(time)
-    //post alert to firebase
   };
 
   cancelButton = () => {
@@ -107,7 +97,9 @@ class CreateAlert extends Component {
   const mapDispatchToProps = (dispatch) => {
     return {
       saveNewAlert: (time) => {
-        dispatch({type: "CREATE_ALERT", time: time})
+        saveAlert({time: time}, (id) => {
+          dispatch({type: "CREATE_ALERT", id:id, time: time})
+        })
       }
     }
   }

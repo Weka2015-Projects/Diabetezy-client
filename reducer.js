@@ -5,15 +5,14 @@ const INITIAL_STATE = Map({ tests: [], alerts: [] })
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'CREATE_ALERT':
-      nextAlertId++
-      const alertMap = Map({id: nextAlertId, time: action.time})
-      return state.set('alerts', state.get('alerts').push(alertMap))
+      const alertMap = Map({id: action.id, time: action.time})
+      return state.set('alerts', state.get('alerts').set(action.id, alertMap))
 
     case 'OVERWRITE_STATE':
       return action.state
 
     case 'CREATE_BLOOD_TEST':
-      var addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
+      const addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
       return state.set('tests', state.get('tests').set(action.id, addBloodTest))
 
     default:

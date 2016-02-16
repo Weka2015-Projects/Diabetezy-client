@@ -55,7 +55,6 @@ class Calendar extends Component {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
     $(dayNum).css('background-color', 'green')
-
   }
 
   saveMonth(e) {
