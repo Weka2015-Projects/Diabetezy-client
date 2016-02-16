@@ -38,17 +38,27 @@ chart: {
               }
   },
   yAxis: {
+    min: 0,
+    max: 25,
     title: {
             enabled: true,
             text: 'mmol/L',
             style: { fontWeight: 'normal' }
             }
+
+
   },
   legend: { enabled: false },
-  series: [{
+  series: [
+  {
     name: 'BSL',
     data: []
-  }],
+  },
+  {
+    name: 'Safe Range',
+    data: []
+  }
+  ],
 }
 
 
@@ -58,6 +68,7 @@ class BloodTestChart extends Component {
        let chartData = getChartData(this.props.tests).toJS()
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
+       chart.series[1].setData(chartData)
        console.log(chartData)
      }
 
