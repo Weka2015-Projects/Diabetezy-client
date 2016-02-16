@@ -5,19 +5,35 @@ body {
   height: 800px;
   position: relative;
 }
+.index{
+  margin: 0 auto;
+}
 .navigation {
   font-family: Helvetica;
   font-size: 16px;
   text-align: center;
 }
+#bootstrap-override select .form-group {
+  margin-bottom: 0;
+}
 .day{
   border: 1px solid #eee;
+  background-color: null;
   float: left;
   font-style: Helvetica;
   font-size: 14;
   height: 48px;
   line-height: 50px;
   width: 48px;
+}
+
+#inputs{
+  padding-top: 20px;
+  display: none;
+  width: 65%;
+  margin: 0 0 20px 0;
+  float: left;
+  text-align: left;
 }
 
 #month{
@@ -33,8 +49,11 @@ padding: 1px;
 div {
   text-align: center;
   margin: 0 auto;
-
 }
+.control-label{
+  text-align: left;
+}
+
 h1{
 	font-family: Arial;
   position: relative;
