@@ -14,6 +14,7 @@ import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 import {List, toJS} from 'immutable'
 import {Input, Button, Table} from 'react-bootstrap'
+import {saveBloodTest} from '../../firebaseWrapper'
 
 class Calendar extends Component {
 
@@ -130,8 +131,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     saveNewTest: (timestamp, value) => {
-      dispatch({type: 'CREATE_BLOOD_TEST', timestamp: timestamp,
-      value: value})
+      saveBloodTest({timestamp: timestamp, value: value}, (id) => {
+        dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
+      })
     }
   }
 }
