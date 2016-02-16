@@ -1,4 +1,4 @@
-body {
+#bootstrap-override body {
   margin: auto;
   border-radius: 14px;
   width: 800px;
@@ -8,13 +8,17 @@ body {
 .index{
   margin: 0 auto;
 }
+#bootstrap-override table{
+  margin-bottom: 4px;
+}
 .navigation {
   font-family: Helvetica;
   font-size: 16px;
   text-align: center;
 }
 #bootstrap-override select .form-group {
-  margin-bottom: 0;
+  margin-bottom: 0 auto;
+
 }
 .day{
   border: 1px solid #eee;
@@ -25,6 +29,9 @@ body {
   height: 48px;
   line-height: 50px;
   width: 48px;
+}
+.day:hover * {
+  background-color: gold;
 }
 
 #inputs{
@@ -46,6 +53,9 @@ margin: 10px;
 padding: 1px;
 }
 
+td{
+  text-align: left;
+}
 div {
   text-align: center;
   margin: 0 auto;

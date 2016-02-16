@@ -20,6 +20,3 @@ const reducer = (state = INITIAL_STATE, action) => {
 } 
 export default reducer
 
-// const newState = reducer(undefined, {type: "CREATE_ALERT", time: "12:30"})
-
-// console.log("hu", newState.get('alerts').last().get('time'))

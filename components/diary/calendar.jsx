@@ -1,6 +1,6 @@
 /*
 TO DO:
-  - timestamp printing to page rather than DD/MM/YYYY HH:mm
+  - Have individual cell light up
   - Send updates to firebase, not dummy db
   - padding around elements on page
   - ability to amend results
@@ -25,7 +25,7 @@ class Calendar extends Component {
       currentMonth: moment().format('M'),
       currentDay: moment().format('D'),
       currentTime: moment().format('HH:mm'),
-      newTestValue: 0.0
+      newTestValue: 0
     }
   }
 
@@ -53,8 +53,7 @@ class Calendar extends Component {
   printTest(dayNum) {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
-    $(dayNum).css('background-color', 'green')
-
+    console.log(this.state.users[0])
   }
 
   saveMonth(e) {
@@ -81,6 +80,7 @@ class Calendar extends Component {
     var visibleTests = this.testsOnSelectedDay().map((test) => {
       return (
         <Table striped hover condensed relative>
+        <tbody>
         <tr>
           <th><strong>Blood sugar level</strong></th>
           <th><strong>Time of test</strong></th>
@@ -89,6 +89,7 @@ class Calendar extends Component {
             <td>{test.get('value')} mmol /L</td>
             <td>{moment.unix(test.get('timestamp')).format("hh:mm a")}</td>
           </tr>
+          </tbody>
         </Table>
     )})
 
