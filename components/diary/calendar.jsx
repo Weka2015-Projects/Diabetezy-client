@@ -1,9 +1,9 @@
 /*
 TO DO:
   - Have individual cell light up
-  - Send updates to firebase, not dummy db
   - padding around elements on page
   - ability to amend results
+  - ability to delete results
 */
 
 import React, {Component} from 'react'
@@ -51,10 +51,14 @@ class Calendar extends Component {
     this.props.saveNewTest(timestamp, this.state.newTestValue)
   }
 
+  // deleteTest(test) {
+  //   this.props.deleteBloodTest(test.get('id'), test.get('timestamp'), test.get('value'))
+  // }
+
   printTest(dayNum) {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
-    console.log(this.state.users[0])
+    $('.results').css('display', 'inline-block')
   }
 
   saveMonth(e) {
@@ -84,11 +88,12 @@ class Calendar extends Component {
         <tbody>
         <tr>
           <th><strong>Blood sugar level</strong></th>
-          <th><strong>Time of test</strong></th>
+          <th colSpan="2"><strong>Time of test</strong></th>
         </tr>
           <tr key={'test_' + test.get('id')}>
             <td>{test.get('value')} mmol /L</td>
             <td>{moment.unix(test.get('timestamp')).format("hh:mm a")}</td>
+            <td><Input type="submit" src="" value="delete" onClick={this.deleteTest.bind(this)}></Input></td>
           </tr>
           </tbody>
         </Table>
@@ -135,8 +140,14 @@ function mapDispatchToProps(dispatch) {
         dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
       })
     }
+    // deleteBloodTest: (id, timestamp, value) => {
+    //   deleteTest({timestamp: timestamp, value: value}, (id) => {
+    //     dispatch({type: 'DELETE_BLOOD_TEST', id: id, timestamp: timestamp, value:value})
+    //   })
+    // }
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
 
 

@@ -49,8 +49,8 @@
 }
 
 select{
-margin: 10px;
-padding: 1px;
+  margin: 10px;
+  padding: 1px;
 }
 
 td{
@@ -84,4 +84,10 @@ h1{
 .hours {
   display: inline-block;
   width: 50%;
+}
+.results {
+  display: none;
+  text-align: left;
+  margin: 0 0 20px 0;
+  float: left;
 }

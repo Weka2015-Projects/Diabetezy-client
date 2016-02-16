@@ -8,18 +8,18 @@ function chartData() {
     datasets: [
       {
 				label: "Blood Test Results",
-	      strokeColor: "rgba(220,220,220,1)",
-	    	pointColor: "rgba(220,220,220,1)",
-	     	fillColor:"rgba(220,220,220,0)",
-	      pointStrokeColor: "#fff",
+	      strokeColor: "rgba(7,70,170,1)",
+	    	pointColor: "rgba(100,21,100,100)",
+	     	fillColor:"rgba(255,220,220,220)",
+	      pointStrokeColor: "#eee",
 	    	data: [8, 10, 9, 12, 4, 10, 9, 7]
       },
       {
 				label: "test case",
-				strokeColor: "rgba(220,220,220,0)",
-	      pointColor: "rgba(220,220,220,0)",
-	      fillColor:"rgba(220,220,220,0)",
-	      pointStrokeColor: "rgba(220,220,220,0)",
+				strokeColor: "rgba(200,20,220,20)",
+	      pointColor: "rgba(0,0,0,0)",
+	      fillColor:"rgba(0,220,220,0)",
+	      pointStrokeColor: "rgba(255,220,220,0)",
 	      data: [0, 30, 0, 0, 0, 0, 0],
 	      scaleShowLabels:false,
 	      showToolTips: false
@@ -37,7 +37,7 @@ const options = {
   bezierCurve: true,
   bezierCurveTension: 0.4,
   pointDot: true,
-  pointDotRadius: 4,
+  pointDotRadius: 10,
   pointDotStrokeWidth: 1,
   pointHitDetectionRadius: 20,
   datasetStroke: true,

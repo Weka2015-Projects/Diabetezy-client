@@ -15,7 +15,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       var addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
       return state.set('tests', state.get('tests').set(action.id, addBloodTest))
 
+    case 'DELETE_BLOOD_TEST':
+    var deleteBloodTest = {id: action.id, timestamp: action.timestamp, value: action.value}
+    return state.get('tests', splice(deleteBloodTest, 1))
     default:
       return state
   }
 } 
+export default reducer
