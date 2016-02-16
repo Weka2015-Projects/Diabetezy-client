@@ -4,6 +4,8 @@ import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts/bundle/highcharts'
 import moment from 'moment'
 import {connect} from 'react-redux'
+import {List, toJS} from 'immutable'
+
 
 
 const getChartData = (tests) => {
@@ -14,6 +16,10 @@ const getChartData = (tests) => {
     ]
   })
 }
+
+const today = moment(new Date()).unix()
+
+const getChartRange = today - 604800
 
 
 var config = {
@@ -26,7 +32,6 @@ chart: {
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
     type: 'datetime',
-           labels: { formatter: function() { return Highcharts.dateFormat('%a %d %b', this.value) },
            dateTimeLabelFormats: {
                     minute: '%H:%M',
                     hour: '%H:%M',
@@ -35,7 +40,7 @@ chart: {
                     month: '%b \'%y',
                     year: '%Y'
                 }
-              }
+
   },
   yAxis: {
     min: 0,
