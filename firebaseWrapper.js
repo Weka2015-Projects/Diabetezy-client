@@ -1,6 +1,6 @@
 import request from 'superagent'
 import Firebase from 'firebase'
-import {Map} from 'immutable'
+import {fromJS} from 'immutable'
 
 var ref = new Firebase("https://diabetezy-server.firebaseio.com");
 
@@ -16,12 +16,23 @@ export const getDataFromFirebase = (callback) => {
   let url = `${ref}users/${auth.uid}.json?auth=${auth.token}`
   request.get(url).end((err, res) => {
     let data = JSON.parse(res.text)
-    let newState = Map({
+    let newState = fromJS({
       tests: data.tests || [],
       alerts: data.alerts || []
     })
     callback(newState)
   })
+}
+
+export const saveBloodTest = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/tests.json?auth=${auth.token}`
+  let id
+  request
+    .post(url)
+    .send({timestamp: action.timestamp, value: action.value})
+    .end((err, res) => {
+      callback(res.body.name)
+    })
 }
 
 function authDataCallback(authData) {

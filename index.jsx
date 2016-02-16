@@ -4,6 +4,7 @@ import reducer from './reducer.js'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {getDataFromFirebase, onFirebaseAuth} from './firebaseWrapper'
+import {Button} from 'react-bootstrap'
 
 import App from './components/app.jsx'
 
