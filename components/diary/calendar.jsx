@@ -1,3 +1,11 @@
+/*
+TO DO:
+  - timestamp printing to page rather than DD/MM/YYYY HH:mm
+  - Send updates to firebase, not dummy db
+  - padding around elements on page
+  - ability to amend results
+*/
+
 import React, {Component} from 'react'
 import Day from './days.jsx'
 import $ from 'jquery'
@@ -23,7 +31,6 @@ class Calendar extends Component {
 
   selectedDay() {
     var timestring = `${this.state.currentYear}-${this.state.currentMonth}-${this.state.currentDay} ${this.state.currentTime}`
-    console.log(timestring)
     return moment(timestring)
   }
 
@@ -72,24 +79,16 @@ class Calendar extends Component {
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
-            console.log('test',test)
-            console.log('test.get(id)', test.toJS())
-            console.log('test.get(value)', test.get('value'))
-
       return (
         <Table striped hover condensed relative>
-          <thead>
-            <tr>
-              <td><strong>Blood sugar level</strong></td>
-              <td><strong>Time of test</strong></td>
-            </tr>
-          </thead>
-          <tbody>
+        <tr>
+          <th><strong>Blood sugar level</strong></th>
+          <th><strong>Time of test</strong></th>
+        </tr>
           <tr key={'test_' + test.get('id')}>
             <td>{test.get('value')} mmol /L</td>
-            <td>{test.get('timestamp')}</td>
+            <td>{moment.unix(test.get('timestamp')).format("hh:mm a")}</td>
           </tr>
-          </tbody>
         </Table>
     )})
 
@@ -136,4 +135,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
+
 
