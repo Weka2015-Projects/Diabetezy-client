@@ -7,7 +7,8 @@ class Alert extends Component {
   render() {
     let alertsArray = this.props.alerts.map((alert) => {
       const id = alert.get('id')
-      return <div key={alert.get('id')}><Link to={`/alerts/${id}`}>{alert.get('time')}</Link></div>
+      const time = alert.get('time')
+      return <div key={alert.get('id')}><Link to={`/alerts/${id}/${time}`}>{alert.get('time')}</Link></div>
     })
     return(
       <div>
@@ -23,7 +24,7 @@ class Alert extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    alerts: state.get('alerts')
+    alerts: state.get('alerts'),
   }
 }
 

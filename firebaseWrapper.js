@@ -35,6 +35,17 @@ export const saveBloodTest = (action, callback) => {
     })
 }
 
+export const saveAlert = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/alerts.json?auth=${auth.token}`
+  let id
+  request
+    .post(url)
+    .send({time: action.time})
+    .end((err, res) => {
+      callback(res.body.name)
+    })
+}
+
 function authDataCallback(authData) {
   if (authData) {
     auth = authData
