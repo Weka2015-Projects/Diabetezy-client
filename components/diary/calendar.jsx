@@ -52,11 +52,8 @@ class Calendar extends Component {
 
   deleteTest(test) {
     var deleteDayTest = this.testsOnSelectedDay().toJS()
-    console.log("deleteDayTest", deleteDayTest)
     var id = Object.keys(deleteDayTest)[0]
-    console.log("id", id)
-    console.log("this.props", this.props.deleteBloodTest(id))
-    return this.props.deleteBloodTest(id)
+    return this.props.destroyBloodTest(id)
     }
 
   printTest(dayNum) {
@@ -101,7 +98,8 @@ class Calendar extends Component {
           </tr>
           </tbody>
         </Table>
-    )})
+    )}
+  )
 
     return <div id="month">
       <div>
@@ -144,8 +142,12 @@ function mapDispatchToProps(dispatch) {
         dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
       })
     },
-    deleteBloodTest: (id) => 
-      dispatch({type: 'DELETE_BLOOD_TEST', id: id})
+
+    destroyBloodTest: (id) => {
+      deleteBloodTest({id: id}, (id) => {
+        dispatch({type: 'DELETE_BLOOD_TEST', id: id})
+      }
+    )}
   }
 }
 

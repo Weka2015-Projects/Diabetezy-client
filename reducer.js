@@ -16,6 +16,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return state.set('tests', state.get('tests').set(action.id, addBloodTest))
 
     case 'DELETE_BLOOD_TEST':
+    
       return state.deleteIn(['tests', action.id])
 
     default:
