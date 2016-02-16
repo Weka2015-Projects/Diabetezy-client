@@ -4,6 +4,7 @@ import AlarmDigit from './alarmDigit.jsx'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
+
 class CreateAlert extends Component {
   constructor(props){
     super(props)
@@ -14,6 +15,8 @@ class CreateAlert extends Component {
       times: [{time: "0715"}]
     }
   }
+
+
 
   handleHrIncrease = () => {
     this.state.counter1 ++
@@ -46,6 +49,9 @@ class CreateAlert extends Component {
     }
     this.setState(this.state)
   };
+
+
+
 
 
   saveButton = () => {

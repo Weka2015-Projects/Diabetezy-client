@@ -12,8 +12,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       nextAlertId++
       const alertMap = Map({id: nextAlertId, time: action.time})
       return state.set('alerts', state.get('alerts').push(alertMap))
-      var alertMap = Map({id: 2, time: action.time})
-        return state.set('alerts', state.get('alerts').push(alertMap))
 
     case 'CREATE_BLOOD_TEST':
       nextTestId++
