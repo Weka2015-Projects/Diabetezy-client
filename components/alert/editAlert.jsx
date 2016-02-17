@@ -17,6 +17,7 @@ class EditAlert extends Component {
       id: this.props.params.id,
       time: this.props.params.time
     }
+    this.handleAlertTime()
   }
 
   // handle counter Limits
@@ -53,10 +54,16 @@ class EditAlert extends Component {
     this.setState(this.state)
   };
 
+  handleAlertTime = () => {
+    let splitAlertHour = (this.state.hourCounter = parseInt(this.state.time.substring(0,2)))
+    let splitAlertMinute = (this.state.minuteCounter = parseInt(this.state.time.substring(3,5)))
+  };
+
+
   deleteButton = () => {
     const id = this.state.id
-    console.log(id)
-    return this.props.destroy(id)
+    this.props.destroy(id)
+    alert("You has deleted it")
   };
 
   render() {
@@ -67,7 +74,7 @@ class EditAlert extends Component {
           <Link to={`/alert`}>Back</Link>
         </div>
 
-      <h2>EDIT</h2>
+      <h2>{this.state.time}</h2>
 
       <div className="hours">
         <button onClick={this.handleHourIncrease}>++</button>

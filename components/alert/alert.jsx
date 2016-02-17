@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 class Alert extends Component {
 
   render() {
-    console.log(this.props)
     let alertsArray = this.props.alerts.map((alert, id) => {
       const time = alert.get('time')
       return <div key={alert.get('id')}><Link to={`/alerts/${id}/${time}`}>{alert.get('time')}</Link></div>

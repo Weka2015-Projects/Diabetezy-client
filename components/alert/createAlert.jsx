@@ -14,8 +14,10 @@ class CreateAlert extends Component {
       hourCounter: 0,
       minuteCounter: 0,
       hourCounterLimit: 24,
-      minuteCounterLimit: 59
+      minuteCounterLimit: 59,
+      currentTime : moment().format('HH:mm')
     }
+     this.handleAlertTime()
   }
 
 
@@ -66,14 +68,12 @@ class CreateAlert extends Component {
   saveButton = () => {
     let time = this.handleCountertoDB()
     this.props.saveNewAlert(time)
+    alert('You has made the big save')
   };
 
-  cancelButton = () => {
-    console.log('cancel')
-  };
-
-  deleteButton = (time) => {
-    console.log("delete")
+  handleAlertTime = () => {
+    let splitAlertHour = (this.state.hourCounter = parseInt(this.state.currentTime.substring(0,2)))
+    let splitAlertMinute = (this.state.minuteCounter = parseInt(this.state.currentTime.substring(3,5)))
   };
 
   render() {
@@ -83,7 +83,7 @@ class CreateAlert extends Component {
           <Link to={`/home`}>Home</Link><br />
           <Link to={`/alert`}>Back</Link>
         </div>
-        <h2>CREATE</h2>
+        <h2>{this.state.currentTime}</h2>
         <div className="hours">
           <button onClick={this.handleHourIncrease}>++</button>
             <h2>{this.state.hourCounter}</h2>
@@ -98,8 +98,6 @@ class CreateAlert extends Component {
 
         <div className="buttons">
             <button onClick={this.saveButton}>Save Time</button>
-            <button onClick={this.cancelButton}>Cancel</button>
-            <button onClick={this.deleteButton}>Delete Time</button>
           </div>
 
       </div>
@@ -111,7 +109,6 @@ class CreateAlert extends Component {
     return {
       saveNewAlert: (time) => {
         saveAlert({time: time}, (id) => {
-          console.log(id)
           dispatch({type: "CREATE_ALERT", id: id, time: time})
         })
       }
