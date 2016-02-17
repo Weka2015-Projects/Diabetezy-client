@@ -13,7 +13,7 @@ class Alert extends Component {
     })
     return(
       <div>
-        <div className="navigation">
+        <div className="alert-nav">
           <Link to={`/home`}>Home</Link> | <Link to={`/createAlert`}>Create An Alert +</Link>
         </div>
         <div>
