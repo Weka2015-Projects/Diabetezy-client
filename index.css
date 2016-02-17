@@ -26,11 +26,38 @@ body {
 #bootstrap-override .navigation {
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
-  text-align: center;
   vertical-align: middle;
   float: left;
   display: inline;
   margin-left: 10%;}
+
+.navigation {
+  width:100%;
+  margin-top: -3%;
+}
+
+.alert-nav {
+  margin-left: 10%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#alert-button {
+  margin-top: 1%;
+}
+
+.alert-box{
+  margin-left: 10%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.panel-body {
+  text-align: center;
+}
+
+.panel.panel-default{
+  border: none;
+  background-color: transparent;
+}
 
 #bootstrap-override select .form-group {
   margin-bottom: 10px;
@@ -82,6 +109,11 @@ td{
   text-align: left;
 }
 
+.edit-alert{
+  margin-left: 10%;
+  font-family: 'Quicksand', sans-serif;
+}
+
 #bootstrap-override h1{
 	font-family: 'Quicksand', sans-serif;
   position: relative;
@@ -121,7 +153,7 @@ td{
 
 .hours {
   display: inline-block;
-  width: 50%;
+  width: 5.2%;
 }
 .results {
   display: none;

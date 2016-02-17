@@ -73,14 +73,15 @@ class CreateAlert extends Component {
   render() {
     return(
       <div>
-        <div>
-          <Link to={`/home`}>Home</Link><br />
-          <Link to={`/alert`}>Back</Link>
+        <div className="alert-nav">
+          <Link to={`/home`}>Home |</Link>
+          <Link to={`/alert`}> Back</Link>
         </div>
+      <div className="alert-box">
         <h2>Set An Alert For:</h2>
         <div className="hours">
           <Button onClick={this.handleHourIncrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">++</Button>
-            <h2>{this.state.hourCounter}</h2>
+            <h2>{this.state.hourCounter}  :</h2>
           <Button onClick={this.handleHourDecrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">--</Button>
         </div>
 
@@ -90,9 +91,10 @@ class CreateAlert extends Component {
           <Button onClick={this.handleMinuteDecrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">--</Button>
         </div>
 
-        <div className="buttons">
+        <div className="buttons" id="alert-button">
             <Button onClick={this.saveButton} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">Save Alert</Button>
           </div>
+        </div>
       </div>
       )
     }

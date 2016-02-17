@@ -28,14 +28,16 @@ class EditAlert extends Component {
   render() {
     return(
       <div>
-        <div>
-          <Link to={`/home`}>Home</Link><br />
+        <div className="alert-nav">
+          <Link to={`/home`}>Home | </Link>
           <Link to={`/alert`}>Back</Link>
         </div>
-      <h2>{this.state.time}</h2>
+      <div className="edit-alert">  
+        <h2>{this.state.time}</h2>
 
-      <div className="buttons">
-          <button onClick={this.deleteButton}>Remove Alert</button>
+        <div className="buttons">
+            <Button onClick={this.deleteButton}>Remove Alert</Button>
+        </div>
       </div>
     </div>
     )
