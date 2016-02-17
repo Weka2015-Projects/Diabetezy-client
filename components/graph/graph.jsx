@@ -18,11 +18,10 @@ const getChartData = (tests) => {
 }
 
 
-//var dataArray = newState.get('tests').map(function(test){
-//  return test.get('timestamp')}).toArray()
-
-
-
+const weekInUnix = 604800
+const weekEndDate = moment().unix(new Date())
+const weekStartDate = weekEndDate - weekInUnix
+console.log(weekEndDate)
 
 
 
@@ -35,15 +34,13 @@ chart: {
       },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-    type: 'datetime',
-           dateTimeLabelFormats: {
-                    minute: '%H:%M',
-                    hour: '%H:%M',
-                    day: '%e. %b',
-                    week: '%e. %b',
-                    month: '%b \'%y',
-                    year: '%Y'
-                }
+     type: 'datetime',
+     min: Number(weekStartDate * 1000),
+     max: Number(weekEndDate * 1000),
+     minorTickInterval: 6 * 3600 * 1000,
+     minorTickLength:10,
+     minorTickWidth: 1,
+     minorGridLineWidth: 0
 
   },
   yAxis: {
@@ -61,7 +58,9 @@ chart: {
   series: [
   {
     name: 'BSL',
-    data: []
+    data: [],
+    pointStart: Number(weekStartDate * 1000),
+    pointInterval: 24 * 36e5 // one hour
   }
   ]
 }
@@ -70,7 +69,7 @@ class BloodTestChart extends Component {
 
 
     componentDidMount() {
-       let chartData = getChartData(this.props.tests)
+       let chartData = getChartData(this.props.tests).toJS()
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
        console.log('this props:', this.props.tests)
