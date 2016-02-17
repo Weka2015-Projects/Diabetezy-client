@@ -37,6 +37,27 @@ export const saveBloodTest = (action, callback) => {
 
 export const deleteBloodTest = (action, callback) => {
   let url = `${ref}users/${auth.uid}/tests/${action.id}.json?auth=${auth.token}`
+    let id
+  request
+    .del(url)
+    .end((err, res) => {
+      callback(action.id)
+    })
+  }
+
+export const saveAlert = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/alerts.json?auth=${auth.token}`
+  let id
+  request
+    .post(url)
+    .send({time: action.time})
+    .end((err, res) => {
+      callback(res.body.name)
+    })
+}
+
+export const deleteAlert = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/alerts/${action.id}.json?auth=${auth.token}`
   let id
   request
     .del(url)
