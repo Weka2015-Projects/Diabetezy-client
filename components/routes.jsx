@@ -7,6 +7,7 @@ import Graph from './graph/graph.jsx'
 import Homepage from './homepage/homepage.jsx'
 import Login from './login/login.jsx'
 import CreateAlert from './alert/createAlert.jsx'
+import EditAlert from './alert/editAlert.jsx'
 
 export default (
     <Router>
@@ -14,7 +15,7 @@ export default (
         <Route path='/home' component ={Homepage} />
         <Route path='/alert' component ={Alert} />
         <Route path='/createAlert' component ={CreateAlert} />
-        <Route path='/alerts/:id/:time' component ={CreateAlert} />        
+        <Route path='/alerts/:id/:time' component ={EditAlert} />        
         <Route path='/graph' component ={Graph} />
         <Route path='/diary' component ={Diary} />
     </Router>

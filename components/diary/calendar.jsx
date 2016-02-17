@@ -1,4 +1,4 @@
-/*
+ /*
 TO DO:
   - timestamp printing to page rather than DD/MM/YYYY HH:mm
   - Send updates to firebase, not dummy db
