@@ -1,6 +1,4 @@
-var test = require('tape')
+import chai from 'chai';
+import chaiImmutable from 'chai-immutable'
 
-test('testing Diabetezy-client', function (t) {
-  t.ok(true)
-  t.end()
-})
+chai.use(chaiImmutable)

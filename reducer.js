@@ -1,6 +1,6 @@
-import {fromJS, Map} from 'immutable'
+import {fromJS, Map, List} from 'immutable'
 
-const INITIAL_STATE = Map({ tests: [], alerts: [] })
+const INITIAL_STATE = Map({ tests: List.of(), alerts: List.of() })
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
@@ -16,16 +16,20 @@ const reducer = (state = INITIAL_STATE, action) => {
        return deleteAlert
 
     case 'OVERWRITE_STATE':
-      return action.state
+      return fromJS(action.state)
 
     case 'CREATE_BLOOD_TEST':
       const addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
       return state.set('tests', state.get('tests').set(action.id, addBloodTest))
 
+
+    case 'DELETE_BLOOD_TEST':
+      const deleteblood = state.deleteIn(['tests', action.id])
+      return deleteblood
+
     default:
       return state
   }
-}
-
+} 
 export default reducer
 

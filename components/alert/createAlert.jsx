@@ -68,7 +68,7 @@ class CreateAlert extends Component {
   saveButton = () => {
     let time = this.handleCountertoDB()
     this.props.saveNewAlert(time)
-    alert('You has made the big save')
+    alert('tiny little handz')
   };
 
   handleAlertTime = () => {

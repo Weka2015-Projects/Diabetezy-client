@@ -2,69 +2,92 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts/bundle/highcharts'
+import moment from 'moment'
+import {connect} from 'react-redux'
+import {List, toJS} from 'immutable'
+import {getDataFromFirebase} from '../../firebaseWrapper'
 
-// var sevenDayChart = filter through by most recent 7 days and put values into data array
-// unix week is 604800 seconds
+const getChartData = (tests) => {
+  return tests.map((test) => {
+    return (
+    moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
+    test.get('value')
+    )
+  })
+}
 
-
+const weekInUnix = 604800
+const weekEndDate = moment().unix(new Date())
+const weekStartDate = weekEndDate - weekInUnix
 
 var config = {
-chart: {
-          borderColor: '#010d64',
-          borderWidth: 3,
-          borderRadius: 6,
-          type: 'line'
-      },
-  title: {
-    text: 'Weekly Blood Sugar Levels'
-  },
-  xAxis: {
-  //categories: ['1455483473654', '1455483373654', '1455483373654','Feb 2', 'Feb 3', 'Feb 4', 'Feb 5', 'Feb 6', 'Feb 7'],
-    type: 'datetime',
-    dateTimeLabelFormats: {
-              hour: '%l:%M %p'
+  chart: {
+            borderColor: '#010d64',
+            borderWidth: 3,
+            borderRadius: 6,
+            type: 'line'
           },
-           labels: {
-                  formatter: function() {
-                      return Highcharts.dateFormat('%a %d %b', this.value) }}
-  },
+  title: { text: 'Weekly Blood Sugar Levels'},
+  xAxis: {
+           type: 'datetime',
+           min: Number(weekStartDate * 1000),
+           max: Number(weekEndDate * 1000),
+           minorTickInterval: 6 * 3600 * 1000,
+           minorTickLength:10,
+           minorTickWidth: 1,
+           minorGridLineWidth: 0
+          },
   yAxis: {
-    title: {
-              enabled: true,
-              text: 'BSL',
-              style: {
-                  fontWeight: 'normal'
-            }
-          }
-  },
-  legend: {
-            enabled: false
-        },
-  credits: {
-            enabled: true
-        },
+            min: 0,
+            max: 25,
+            title: {
+            enabled: true,
+            text: 'mmol/L',
+            style: { fontWeight: 'normal' }
+            }},
+  legend: { enabled: false },
   series: [{
-    name: 'BSL',
-    data: [12, 10.5, 10.4, 12.2, 14, 17, 13.6, 14.5, 21.4, 19.1, 9.6, 5.4]
-  }],
-
+            name: 'BSL',
+            data: [],
+            pointStart: Number(weekStartDate * 1000),
+            pointInterval: 24 * 36e5 // one hour
+          }]
 }
 
 
-
 class BloodTestChart extends Component {
-    componentDidMount() {
-       let chart = this.refs.chart.getChart()
-       chart.series[0].addPoint({x: 10, y:12})
-     }
+    constructor(props){
+      super(props)
 
+      this.state = {
+
+      }
+    }
+
+    componentDidMount() {
+       let chartData = getChartData(this.props)
+       let chart = this.refs.chart.getChart()
+       chart.series[0].setData(chartData)
+     }
 
     render() {
       return (
       <div>
-      <Link to={`/home`}>Home</Link><br/>
+      <Link to={`/home`}>Home |</Link>
+      <Link to={`/diary`}> Diary |</Link>
+      <Link to={`/alert`}> Alerts</Link><br/>
       <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
       </div>)
     }
 }
-export default BloodTestChart
+
+function mapStateToProps(state) {
+  return {
+    tests: state.get('tests')
+  }
+}
+
+
+
+
+export default connect(mapStateToProps)(BloodTestChart)
