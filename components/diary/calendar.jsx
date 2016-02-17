@@ -19,8 +19,8 @@ import {saveBloodTest} from '../../firebaseWrapper'
 class Calendar extends Component {
 
   constructor(props){
-    super(props) 
-    
+    super(props)
+
     this.state = {
       currentYear: moment().format('YYYY'),
       currentMonth: moment().format('M'),
@@ -137,5 +137,3 @@ function mapDispatchToProps(dispatch) {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
-
-

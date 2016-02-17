@@ -17,9 +17,13 @@ const getChartData = (tests) => {
   })
 }
 
-const today = moment(new Date()).unix()
 
-const getChartRange = today - 604800
+//var dataArray = newState.get('tests').map(function(test){
+//  return test.get('timestamp')}).toArray()
+
+
+
+
 
 
 var config = {
@@ -62,15 +66,17 @@ chart: {
   ]
 }
 
-
-
 class BloodTestChart extends Component {
+
+
     componentDidMount() {
-       let chartData = getChartData(this.props.tests).toJS()
+       let chartData = getChartData(this.props.tests)
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
-       console.log(chartData)
+       console.log('this props:', this.props.tests)
+
      }
+
 
     render() {
       return (
@@ -84,10 +90,13 @@ class BloodTestChart extends Component {
 }
 
 function mapStateToProps(state) {
+console.log('the state.get', state.get('tests'))
   return {
     tests: state.get('tests')
   }
 }
+
+
 
 
 export default connect(mapStateToProps)(BloodTestChart)
