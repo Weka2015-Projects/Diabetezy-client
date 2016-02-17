@@ -20,7 +20,6 @@ class EditAlert extends Component {
     let splitAlertMinute = (this.state.minuteCounter = parseInt(this.state.time.substring(3,5)))
   };
 
-
   deleteButton = () => {
     const id = this.state.id
     this.props.destroy(id)
@@ -34,7 +33,6 @@ class EditAlert extends Component {
           <Link to={`/home`}>Home</Link><br />
           <Link to={`/alert`}>Back</Link>
         </div>
-
       <h2>{this.state.time}</h2>
 
       <div className="buttons">

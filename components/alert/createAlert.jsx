@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 import {saveAlert} from '../../firebaseWrapper'
 
-
 class CreateAlert extends Component {
   constructor(props) {
     super(props)
@@ -20,17 +19,14 @@ class CreateAlert extends Component {
      this.handleAlertTime()
   }
 
-
   handleCounterLimits = () => {
     if (this.state.hourCounter > this.state.hourCounterLimit) { this.state.hourCounter = 0 }
     if (this.state.hourCounter < 0) { this.state.hourCounter = this.state.hourCounterLimit }
     if (this.state.minuteCounter > this.state.minuteCounterLimit) { this.state.minuteCounter = 0 }
     if (this.state.minuteCounter < 0) { this.state.minuteCounter = this.state.minuteCounterLimit }
-
     this.setState(this.state)
   };
 
-  // counter increment buttons
   handleHourIncrease = () => {
     this.state.hourCounter ++
     this.handleCounterLimits()
@@ -54,7 +50,6 @@ class CreateAlert extends Component {
     this.handleCounterLimits()
     this.setState(this.state)
   };
-
 
   handleCountertoDB = () => {
     let hour = this.state.hourCounter
@@ -83,7 +78,7 @@ class CreateAlert extends Component {
           <Link to={`/home`}>Home</Link><br />
           <Link to={`/alert`}>Back</Link>
         </div>
-        <h2>Set An Alert For</h2>
+        <h2>Set An Alert For:</h2>
         <div className="hours">
           <button onClick={this.handleHourIncrease}>++</button>
             <h2>{this.state.hourCounter}</h2>
@@ -98,7 +93,7 @@ class CreateAlert extends Component {
 
         <div className="buttons">
             <button onClick={this.saveButton}>Set Alert</button>
-          </div>
+        </div>
 
       </div>
       )
