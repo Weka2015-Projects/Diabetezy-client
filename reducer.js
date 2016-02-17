@@ -5,8 +5,10 @@ const INITIAL_STATE = Map({ tests: [], alerts: [] })
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'CREATE_ALERT':
+
       const alertMap = Map({id: action.id, time: action.time})
       return state.set('alerts', state.get('alerts').set(action.id, alertMap))
+
 
     case 'OVERWRITE_STATE':
       return action.state
@@ -21,3 +23,4 @@ const reducer = (state = INITIAL_STATE, action) => {
 }
 
 export default reducer
+

@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 import {saveAlert} from '../../firebaseWrapper'
 
+
 class CreateAlert extends Component {
   constructor(props) {
     super(props)
@@ -17,7 +18,7 @@ class CreateAlert extends Component {
       minuteCounterLimit: 59,
       alertTime: this.props.params.time,
       id: this.props.params.id,
-      currentTime: moment().format('HH:mm')   
+      currentTime: moment().format('HH:mm')
     }
 
     // if alert already exists do this:
@@ -25,7 +26,7 @@ class CreateAlert extends Component {
       let alertTime = this.props.params.time
       let splitAlertHour = (this.state.hourCounter = parseInt(alertTime.substring(0,2)))
       let splitAlertMinute = (this.state.minuteCounter = parseInt(alertTime.substring(3,5)))
-    }  
+    }
 }
 
   handleCounterLimits = () => {
@@ -33,6 +34,7 @@ class CreateAlert extends Component {
     if (this.state.hourCounter < 0) { this.state.hourCounter = this.state.hourCounterLimit }
     if (this.state.minuteCounter > this.state.minuteCounterLimit) { this.state.minuteCounter = 0 }
     if (this.state.minuteCounter < 0) { this.state.minuteCounter = this.state.minuteCounterLimit }
+
     this.setState(this.state)
   };
 
@@ -40,26 +42,27 @@ class CreateAlert extends Component {
   handleHourIncrease = () => {
     this.state.hourCounter ++
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
   };
 
   handleHourDecrease = () => {
     this.state.hourCounter --
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
   };
 
   handleMinuteIncrease = () => {
     this.state.minuteCounter ++
-    this.handleCounterLimits()   
-    this.setState(this.state)    
+    this.handleCounterLimits()
+    this.setState(this.state)
   };
 
   handleMinuteDecrease = () => {
     this.state.minuteCounter --
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
   };
+
 
   saveButton = () => {
     let timeHr = this.state.hourCounter
@@ -87,28 +90,28 @@ class CreateAlert extends Component {
           <Link to={`/home`}>Home</Link><br />
           <Link to={`/alert`}>Back</Link>
         </div>
-        
+
         <h2>{this.state.currentTime}</h2>
-        
+
         <div className="hours">
           <button onClick={this.handleHourIncrease}>++</button>
             <h2>{this.state.hourCounter}</h2>
-          <button onClick={this.handleHourDecrease}>--</button>        
+          <button onClick={this.handleHourDecrease}>--</button>
         </div>
 
-        <div className="minutes">        
-          <button onClick={this.handleMinuteIncrease}>++</button>        
+        <div className="minutes">
+          <button onClick={this.handleMinuteIncrease}>++</button>
             <h2>{this.state.minuteCounter}</h2>
-          <button onClick={this.handleMinuteDecrease}>--</button>        
+          <button onClick={this.handleMinuteDecrease}>--</button>
         </div>
 
         <div className="buttons">
             <button onClick={this.saveButton}>Save Time</button>
             <button onClick={this.cancelButton}>Cancel</button>
             <button onClick={this.deleteButton}>Delete Time</button>
-          </div>        
+          </div>
 
-      </div>           
+      </div>
       )
     }
   }
