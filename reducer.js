@@ -1,25 +1,31 @@
 import {fromJS, Map} from 'immutable'
-import data from './test-data.json'
 
-const INITIAL_STATE = fromJS(data.users[0])
-let nextTestId = 11003
+const INITIAL_STATE = Map({ tests: [], alerts: [] })
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+
     case 'CREATE_ALERT':
-      var alertMap = Map({id: 2, time: action.time})
-        return state.set('alerts', state.get('alerts').push(alertMap))
+
+      const addAlert = Map({id: action.id, time: action.time})
+      return state.set('alerts', state.get('alerts').set(action.id, addAlert))
+
+    case 'DELETE_ALERT':
+
+       const deleteAlert = state.deleteIn(['alerts', action.id])
+       return deleteAlert
+
+    case 'OVERWRITE_STATE':
+      return action.state
 
     case 'CREATE_BLOOD_TEST':
-      nextTestId++
-      var fuckMyLifeRn = Map({id:nextTestId, timestamp: action.timestamp, value: action.value})
-      return state.set('tests', state.get('tests').push(fuckMyLifeRn))
+      const addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
+      return state.set('tests', state.get('tests').set(action.id, addBloodTest))
+
     default:
       return state
   }
-} 
+}
+
 export default reducer
 
-// const newState = reducer(undefined, {type: "CREATE_ALERT", time: "12:30"})
-
-// console.log("hu", newState.get('alerts').last().get('time'))

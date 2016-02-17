@@ -1,11 +1,20 @@
+ /*
+TO DO:
+  - timestamp printing to page rather than DD/MM/YYYY HH:mm
+  - Send updates to firebase, not dummy db
+  - padding around elements on page
+  - ability to amend results
+*/
+
 import React, {Component} from 'react'
 import Day from './days.jsx'
 import $ from 'jquery'
 import moment from 'moment'
 import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
-import {List} from 'immutable'
-import {Input, Button} from 'react-bootstrap'
+import {List, toJS} from 'immutable'
+import {Input, Button, Table} from 'react-bootstrap'
+import {saveBloodTest} from '../../firebaseWrapper'
 
 class Calendar extends Component {
 
@@ -17,6 +26,7 @@ class Calendar extends Component {
       currentMonth: moment().format('M'),
       currentDay: moment().format('D'),
       currentTime: moment().format('HH:mm'),
+      newTestValue: 0.0
     }
   }
 
@@ -38,12 +48,13 @@ class Calendar extends Component {
 
   createTest() {
     const timestamp = this.selectedDay().unix()
-    this.props.saveNewTest(timestamp, this.refs.test_value.value)
+    this.props.saveNewTest(timestamp, this.state.newTestValue)
   }
 
   printTest(dayNum) {
-    this.setState({currentDay: dayNum+1})
-    $('#inputs').css('display', 'block')
+    this.setState({currentDay: dayNum + 1})
+    $('#inputs').css('display', 'inline-block')
+    $(dayNum).css('background-color', 'green')
   }
 
   saveMonth(e) {
@@ -58,14 +69,28 @@ class Calendar extends Component {
     this.setState({currentTime: e.target.value})
   }
 
+  saveTest(e) {
+    this.setState({newTestValue: e.target.value})
+  }
+
   render() {
     var month = []
     for(var dayNum = 0; dayNum < 31; dayNum++){
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
-      return <div key={'test_' + test.get('id')}>Test result: {test.get('value')} mmol /L</div>
-    })
+      return (
+        <Table striped hover condensed relative>
+        <tr>
+          <th><strong>Blood sugar level</strong></th>
+          <th><strong>Time of test</strong></th>
+        </tr>
+          <tr key={'test_' + test.get('id')}>
+            <td>{test.get('value')} mmol /L</td>
+            <td>{moment.unix(test.get('timestamp')).format("hh:mm a")}</td>
+          </tr>
+        </Table>
+    )})
 
     return <div id="month">
       <div>
@@ -83,14 +108,13 @@ class Calendar extends Component {
         {month}
       </div>
       <div id="inputs">
-        <Input className="test" ref="test_value" type="number" type="text" label="Blood Test Result: "></Input><br/>
-        <Input className="test" ref="time" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} type="text" label="Time: ">
+        <Input className="test" type="number" label="Blood Test Result: " value={this.state.newTestValue} onChange={this.saveTest.bind(this)}></Input><br/>
+        <Input className="test" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} label="Time: ">
         </Input><br/>
-      </div>
         <Button onClick={this.createTest.bind(this)} className='btn btn-default' bsStyle="success" id="saveResult">Save Result</Button>
-      
-        <div className="results">
-          {visibleTests}
+      </div>
+      <div className="results">
+        {visibleTests}
       </div>
     </div>
   }
@@ -105,10 +129,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     saveNewTest: (timestamp, value) => {
-      dispatch({type: 'CREATE_BLOOD_TEST', timestamp: timestamp,
-      value: value})
+      saveBloodTest({timestamp: timestamp, value: value}, (id) => {
+        dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
+      })
     }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
+
 
