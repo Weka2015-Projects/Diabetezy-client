@@ -1,27 +1,34 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
-
+import {Panel} from 'react-bootstrap'
 class Alert extends Component {
 
   render() {
-    let alertsArray = this.props.alerts.map((alert) => {
-      return <div key={alert.get('id')}>{alert.get('time')}</div>
+    let alertsArray = this.props.alerts.map((alert, id) => {
+      const time = alert.get('time')
+      return (
+          <div key={alert.get('id')}>{alert.get('time')}<Link to={`/alerts/${id}/${time}`} className="alertTime">[x]</Link></div>
+        )
     })
     return(
       <div>
-        <Link to={`/home`}>Home</Link>
-        <div><Link to={`/createAlert`}>Create Alert</Link></div>
-        <div>{alertsArray}</div>
+        <div className="alert-nav">
+          <Link to={`/home`}>Home</Link> | <Link to={`/createAlert`}>Create An Alert +</Link>
+        </div>
+        <div>
+        </div>
+        <Panel>
+          {alertsArray}
+        </Panel>
      </div>
     )
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    alerts: state.get('alerts')
+    alerts: state.get('alerts'),
   }
 }
 

@@ -1,21 +1,35 @@
-import {fromJS, Map} from 'immutable'
-import data from './test-data.json'
+import {fromJS, Map, List} from 'immutable'
 
-const INITIAL_STATE = fromJS(data.users[0])
-
-// console.log(INITIAL_STATE.get('alerts').first().get('time'))
+const INITIAL_STATE = Map({ tests: List.of(), alerts: List.of() })
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+
     case 'CREATE_ALERT':
-      var alertMap = Map({id: 2, time: action.time})
-      return state.set('alerts', state.get('alerts').push(alertMap))
+
+      const addAlert = Map({id: action.id, time: action.time})
+      return state.set('alerts', state.get('alerts').set(action.id, addAlert))
+
+    case 'DELETE_ALERT':
+
+       const deleteAlert = state.deleteIn(['alerts', action.id])
+       return deleteAlert
+
+    case 'OVERWRITE_STATE':
+      return fromJS(action.state)
+
+    case 'CREATE_BLOOD_TEST':
+      const addBloodTest = Map({id:action.id, timestamp: action.timestamp, value: action.value})
+      return state.set('tests', state.get('tests').set(action.id, addBloodTest))
+
+
+    case 'DELETE_BLOOD_TEST':
+      const deleteblood = state.deleteIn(['tests', action.id])
+      return deleteblood
+
     default:
       return state
   }
 } 
 export default reducer
 
-// const newState = reducer(undefined, {type: "CREATE_ALERT", time: "12:30"})
-
-// console.log("hu", newState.get('alerts').last().get('time'))
