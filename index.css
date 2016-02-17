@@ -28,9 +28,9 @@ body {
   font-size: 16px;
   text-align: center;
   vertical-align: middle;
-    float: left;
-    display: inline;
-    margin-left: 10%;}
+  float: left;
+  display: inline;
+  margin-left: 10%;}
 
 #bootstrap-override select .form-group {
   margin-bottom: 10px;
