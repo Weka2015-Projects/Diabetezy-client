@@ -25,17 +25,10 @@ chart: {
       },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-    type: 'datetime',
-           labels: { formatter: function() { return Highcharts.dateFormat('%a %d %b', this.value) },
-           dateTimeLabelFormats: {
-                    minute: '%H:%M',
-                    hour: '%H:%M',
-                    day: '%e. %b',
-                    week: '%e. %b',
-                    month: '%b \'%y',
-                    year: '%Y'
-                }
-              }
+  labels: {
+     enabled: false
+ }
+
   },
   yAxis: {
     min: 0,
@@ -52,10 +45,6 @@ chart: {
   series: [
   {
     name: 'BSL',
-    data: []
-  },
-  {
-    name: 'Safe Range',
     data: []
   }
   ],
