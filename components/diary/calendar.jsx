@@ -78,6 +78,7 @@ class Calendar extends Component {
   }
 
   render() {
+
     var month = []
     for(var dayNum = 0; dayNum < moment().daysInMonth(); dayNum++){
       month.push(<Day id={dayNum} skey={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
@@ -119,7 +120,7 @@ class Calendar extends Component {
         <Input className="test" type="number" label="Blood Test Result: " value={this.state.newTestValue} onChange={this.saveTest.bind(this)}></Input><br/>
         <Input className="test" type="time" value={this.state.currentTime} onChange={this.saveTime.bind(this)} label="Time: ">
         </Input><br/>
-        <Button onClick={this.createTest.bind(this)} className='btn btn-default' bsStyle="success" id="saveResult">Save Result</Button>
+        <Button onClick={this.createTest.bind(this)} className='btn btn-default' color="rgba(209, 208, 213, 0.48)" id="saveResult">Save Result</Button>
       </div>
       <div className="results">
         {visibleTests}
