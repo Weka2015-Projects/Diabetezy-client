@@ -5,16 +5,18 @@ import ReactHighcharts from 'react-highcharts/bundle/highcharts'
 import moment from 'moment'
 import {connect} from 'react-redux'
 
-
 const getChartData = (tests) => {
-  return tests.map(function(test) {
-    return [
+  return tests.map((test) => {
+    return (
     moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
     test.get('value')
-    ]
+    )
   })
 }
 
+const weekInUnix = 604800
+const weekEndDate = moment().unix(new Date())
+const weekStartDate = weekEndDate - weekInUnix
 
 var config = {
 chart: {
@@ -51,20 +53,21 @@ chart: {
 }
 
 
-
 class BloodTestChart extends Component {
+
+
     componentDidMount() {
        let chartData = getChartData(this.props.tests).toJS()
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
-       chart.series[1].setData(chartData)
-       console.log(chartData)
      }
 
     render() {
       return (
       <div>
-      <Link to={`/home`}>Home</Link><br/>
+      <Link to={`/home`}>Home |</Link>
+      <Link to={`/diary`}> Diary |</Link>
+      <Link to={`/alert`}> Alerts</Link><br/>
       <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
       </div>)
     }
@@ -75,6 +78,5 @@ function mapStateToProps(state) {
     tests: state.get('tests')
   }
 }
-
 
 export default connect(mapStateToProps)(BloodTestChart)
