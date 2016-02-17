@@ -8,6 +8,8 @@ class App extends Component{
 			<div className="index">
         		<Alarm />
         		<div id="routes">
+        		        <h1>Diabetezy</h1>
+
 				{routes}
 				</div>
 			</div>
