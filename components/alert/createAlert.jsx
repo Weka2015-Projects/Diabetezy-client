@@ -83,7 +83,7 @@ class CreateAlert extends Component {
           <Link to={`/home`}>Home</Link><br />
           <Link to={`/alert`}>Back</Link>
         </div>
-        <h2>{this.state.currentTime}</h2>
+        <h2>Alert Time</h2>
         <div className="hours">
           <button onClick={this.handleHourIncrease}>++</button>
             <h2>{this.state.hourCounter}</h2>
@@ -97,7 +97,7 @@ class CreateAlert extends Component {
         </div>
 
         <div className="buttons">
-            <button onClick={this.saveButton}>Save Time</button>
+            <button onClick={this.saveButton}>Set Alert</button>
           </div>
 
       </div>
