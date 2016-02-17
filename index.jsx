@@ -23,4 +23,4 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>, 
-app)
+document.getElementById('app'))
