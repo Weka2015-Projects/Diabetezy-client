@@ -4,8 +4,8 @@
   "description": "it's a real sweet app",
   "main": "index.js",
   "scripts": {
-    "start": "budo . -d -t babelify --serve bundle.js --live",
-    "build": "browserify . -t babelify -o bundle.js -g uglifyify",
+    "start": "budo ./index.jsx -t babelify -d --serve bundle.js --live",
+    "build": "browserify ./index.jsx -t babelify -o bundle.js -g uglifyify",
     "test": "browserify test.js | smokestack | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
@@ -27,17 +27,30 @@
   },
   "homepage": "https://github.com/michaelmcgrath/Diabetezy-client",
   "dependencies": {
+    "chart.js": "^1.0.2",
+    "immutable": "^3.7.6",
+    "jquery": "^2.2.0",
+    "moment": "^2.11.2",
     "react": "^0.14.7",
+    "react-chart.js": "^1.0.0",
     "react-dom": "^0.14.7",
-    "react-router": "^2.0.0"
+    "react-redux": "^4.4.0",
+    "redux": "^3.3.1"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "babelify": "^7.2.0",
     "browserify": "^10.0.0",
     "budo": "^4.0.0",
     "gh-pages": "^0.3.0",
+    "history": "^2.0.0",
+    "immutable": "^3.7.6",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
+    "redux": "^3.3.1",
     "uglifyify": "^3.0.1",
     "watchify": "^3.1.0"
   }
