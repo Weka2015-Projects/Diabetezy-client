@@ -6,14 +6,11 @@ class Diary extends Component {
 
   render() {
 
-    return <div className="main">
-      <div>
-        <Link to={`/home`}>Home</Link>
-      </div>
-      <div id="calendar">
+    return <div>
+        <div className="navigation">
+          <Link to={`/home`}>Home</Link>
+        </div>
       <Calendar />
-      </div>
-      <div id="test-object"></div>
     </div>
   }
 }
