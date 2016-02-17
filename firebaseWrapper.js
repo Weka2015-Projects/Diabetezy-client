@@ -46,6 +46,16 @@ export const saveAlert = (action, callback) => {
     })
 }
 
+export const deleteAlert = (action, callback) => {
+  let url = `${ref}users/${auth.uid}/alerts/${action.id}.json?auth=${auth.token}`
+  let id
+  request
+    .del(url)
+    .end((err, res) => {
+      callback(action.id)
+    })
+}
+
 function authDataCallback(authData) {
   if (authData) {
     auth = authData

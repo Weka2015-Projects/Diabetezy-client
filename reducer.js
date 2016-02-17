@@ -10,6 +10,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       const addAlert = Map({id: action.id, time: action.time})
       return state.set('alerts', state.get('alerts').set(action.id, addAlert))
 
+    case 'DELETE_ALERT':
+
+       const deleteAlert = state.deleteIn(['alerts', action.id])
+       return deleteAlert
+
     case 'OVERWRITE_STATE':
       return action.state
 

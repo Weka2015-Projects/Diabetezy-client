@@ -4,6 +4,7 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 import {saveAlert} from '../../firebaseWrapper'
+import {deleteAlert} from '../../firebaseWrapper'
 
 class EditAlert extends Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class EditAlert extends Component {
       minuteCounter: 0,
       hourCounterLimit: 24,
       minuteCounterLimit: 59,
+      id: this.props.params.id,
+      time: this.props.params.time
     }
   }
 
@@ -29,25 +32,31 @@ class EditAlert extends Component {
   handleHourIncrease = () => {
     this.state.hourCounter ++
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
   };
 
   handleHourDecrease = () => {
     this.state.hourCounter --
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
   };
 
   handleMinuteIncrease = () => {
     this.state.minuteCounter ++
-    this.handleCounterLimits()   
-    this.setState(this.state)    
+    this.handleCounterLimits()
+    this.setState(this.state)
   };
 
   handleMinuteDecrease = () => {
     this.state.minuteCounter --
     this.handleCounterLimits()
-    this.setState(this.state)    
+    this.setState(this.state)
+  };
+
+  deleteButton = () => {
+    const id = this.state.id
+    console.log(id)
+    return this.props.destroy(id)
   };
 
   render() {
@@ -59,22 +68,20 @@ class EditAlert extends Component {
         </div>
 
       <h2>EDIT</h2>
-      
+
       <div className="hours">
         <button onClick={this.handleHourIncrease}>++</button>
           <h2>{this.state.hourCounter}</h2>
-        <button onClick={this.handleHourDecrease}>--</button>        
+        <button onClick={this.handleHourDecrease}>--</button>
       </div>
 
-      <div className="minutes">        
-        <button onClick={this.handleMinuteIncrease}>++</button>        
+      <div className="minutes">
+        <button onClick={this.handleMinuteIncrease}>++</button>
           <h2>{this.state.minuteCounter}</h2>
-        <button onClick={this.handleMinuteDecrease}>--</button>        
+        <button onClick={this.handleMinuteDecrease}>--</button>
       </div>
 
       <div className="buttons">
-          <button onClick={this.saveButton}>Save Time</button>
-          <button onClick={this.cancelButton}>Cancel</button>
           <button onClick={this.deleteButton}>Delete Time</button>
       </div>
     </div>
@@ -88,7 +95,15 @@ class EditAlert extends Component {
         saveAlert({time: time}, (id) => {
           dispatch({type: "CREATE_ALERT", id: id, time: time})
         })
-      }
+      },
+
+      destroy: (id) => {
+        deleteAlert({id: id}, (id) => {
+          dispatch({type: 'DELETE_ALERT', id: id})
+          }
+      )}
+
+
     }
   }
 
