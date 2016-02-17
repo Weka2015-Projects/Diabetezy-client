@@ -1,35 +1,29 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Alert from './alert.jsx'
+import moment from 'moment'
 
 class Alarm extends Component {
 
 
 
   soundTheAlarm(){
-    let date = new Date()
-    let minute = date.getMinutes()
-    let hour = date.getHours()
     let audio = new Audio('audio/airhorn.mp3')
-    if (hour == 11 && minute == 23){
-
-    audio.play()
-    }
-
-
-    console.log(this.props.alerts.get('time'))
+    this.props.alerts.forEach(function(alert){
+      if((alert.get('time')) == moment().format('HH:mm')){
+        audio.play()
+      }
+    })
   };
 
   componentWillMount() {
-    this.interval = setInterval(this.soundTheAlarm.bind(this), 1000)
-
+    this.interval = setInterval(this.soundTheAlarm.bind(this), 60000)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
     this.interval = undefined
   }
-
 
   render() {
     return(
@@ -38,9 +32,6 @@ class Alarm extends Component {
       </span>
       )
     }
-
-
-
   }
 
   const mapStateToProps = (state) => {
