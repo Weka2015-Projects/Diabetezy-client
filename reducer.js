@@ -9,7 +9,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         return state.set('alerts', state.get('alerts').push(alertMap))
 
     case 'OVERWRITE_STATE':
-    console.log(action.state.toJS)
       return fromJS(action.state)
 
     case 'CREATE_BLOOD_TEST':

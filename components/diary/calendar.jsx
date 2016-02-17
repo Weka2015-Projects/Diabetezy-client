@@ -38,7 +38,6 @@ class Calendar extends Component {
     var currentDay = this.selectedDay()
     var start = currentDay.startOf('day').unix()
     var end = currentDay.endOf('day').unix()
-
     return this.props.tests.filter((test) => {
       var timestamp = test.get('timestamp')
       return timestamp < end && timestamp > start
@@ -60,6 +59,7 @@ class Calendar extends Component {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
     $('.results').css('display', 'inline-block')
+    currentDay.style.backgroundColor = green
   }
 
   saveMonth(e) {
@@ -80,7 +80,7 @@ class Calendar extends Component {
 
   render() {
     var month = []
-    for(var dayNum = 0; dayNum < 31; dayNum++){
+    for(var dayNum = 0; dayNum < moment().daysInMonth(); dayNum++){
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
@@ -104,12 +104,12 @@ class Calendar extends Component {
     return <div id="month">
       <div>
         <select value={this.state.currentMonth} onChange={this.saveMonth.bind(this)}>
-          <option value="12">December</option>
           <option value="1">January</option>
           <option value="2">February</option>
+          <option value="3">March</option>
+
         </select>
           <select value={this.state.currentYear} onChange={this.saveYear.bind(this)}>
-          <option value="2015">2015</option>
           <option value="2016">2016</option>
         </select>
       </div>
