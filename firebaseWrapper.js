@@ -41,7 +41,6 @@ export const deleteBloodTest = (action, callback) => {
   request
     .del(url)
     .end((err, res) => {
-      console.log(action.id)
       callback(action.id)
     })
 }

@@ -22,8 +22,6 @@ describe('action with no type', () => {
 		const initialState = Map({ tests: List.of(), alerts: List.of() })
 		const action = {type: 'CREATE_BLOOD_TEST', id: 8, timestamp: 1455483273, value: "45"}
 		const newState = reducer(initialState, action)
-		console.log(newState)
-
 		expect(newState.get('tests').size).to.equal(1)
 
 	})
