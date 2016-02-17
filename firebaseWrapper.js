@@ -20,17 +20,6 @@ export const getDataFromFirebase = (callback) => {
       tests: data.tests || [],
       alerts: data.alerts || []
     })
-
-    let timeData = newState.get('tests').map(function(test){
-      return test.get('timestamp')}).toArray()
-    let valueData = newState.get('tests').map(function(test){
-      return test.get('value')}).toArray()
-
-    var mergeData = timeData.map(function(v,i) {
-     return [v, valueData[i]]
-   })
-
-
     callback(newState)
   })
 }

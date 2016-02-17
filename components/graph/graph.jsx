@@ -5,10 +5,10 @@ import ReactHighcharts from 'react-highcharts/bundle/highcharts'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {List, toJS} from 'immutable'
-
-
+import {getDataFromFirebase} from '../../firebaseWrapper'
 
 const getChartData = (tests) => {
+  console.log(this.props.test)
   return tests.map(function(test) {
     return [
     moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
@@ -17,65 +17,59 @@ const getChartData = (tests) => {
   })
 }
 
-
 const weekInUnix = 604800
 const weekEndDate = moment().unix(new Date())
 const weekStartDate = weekEndDate - weekInUnix
-console.log(weekEndDate)
-
-
 
 var config = {
-chart: {
-          borderColor: '#010d64',
-          borderWidth: 3,
-          borderRadius: 6,
-          type: 'line'
-      },
+  chart: {
+            borderColor: '#010d64',
+            borderWidth: 3,
+            borderRadius: 6,
+            type: 'line'
+          },
   title: { text: 'Weekly Blood Sugar Levels'},
   xAxis: {
-     type: 'datetime',
-     min: Number(weekStartDate * 1000),
-     max: Number(weekEndDate * 1000),
-     minorTickInterval: 6 * 3600 * 1000,
-     minorTickLength:10,
-     minorTickWidth: 1,
-     minorGridLineWidth: 0
-
-  },
+           type: 'datetime',
+           min: Number(weekStartDate * 1000),
+           max: Number(weekEndDate * 1000),
+           minorTickInterval: 6 * 3600 * 1000,
+           minorTickLength:10,
+           minorTickWidth: 1,
+           minorGridLineWidth: 0
+          },
   yAxis: {
-    min: 0,
-    max: 25,
-    title: {
+            min: 0,
+            max: 25,
+            title: {
             enabled: true,
             text: 'mmol/L',
             style: { fontWeight: 'normal' }
-            }
-
-
-  },
+            }},
   legend: { enabled: false },
-  series: [
-  {
-    name: 'BSL',
-    data: [],
-    pointStart: Number(weekStartDate * 1000),
-    pointInterval: 24 * 36e5 // one hour
-  }
-  ]
+  series: [{
+            name: 'BSL',
+            data: [],
+            pointStart: Number(weekStartDate * 1000),
+            pointInterval: 24 * 36e5 // one hour
+          }]
 }
 
-class BloodTestChart extends Component {
 
+class BloodTestChart extends Component {
+    constructor(props){
+      super(props)
+
+      this.state = {
+
+      }
+    }
 
     componentDidMount() {
-       let chartData = getChartData(this.props.tests).toJS()
+       let chartData = getChartData(this.props)
        let chart = this.refs.chart.getChart()
        chart.series[0].setData(chartData)
-       console.log('this props:', this.props.tests)
-
      }
-
 
     render() {
       return (
@@ -89,7 +83,7 @@ class BloodTestChart extends Component {
 }
 
 function mapStateToProps(state) {
-console.log('the state.get', state.get('tests'))
+console.log('the state', state)
   return {
     tests: state.get('tests')
   }
