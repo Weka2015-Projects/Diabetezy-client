@@ -59,8 +59,6 @@ class Calendar extends Component {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
     $('.results').css('display', 'inline-block')
-    currentDay.style.backgroundColor = green
-    $(dayNum).css('background-color', 'green')
   }
 
   saveMonth(e) {
@@ -82,7 +80,7 @@ class Calendar extends Component {
   render() {
     var month = []
     for(var dayNum = 0; dayNum < moment().daysInMonth(); dayNum++){
-      month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
+      month.push(<Day id={dayNum} skey={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
       return (

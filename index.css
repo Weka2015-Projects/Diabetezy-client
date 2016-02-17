@@ -65,10 +65,13 @@ div {
   text-align: left;
 }
 
-h1{
+#bootstrap-override h1{
+  background-image: url('images/needles.jpg');
+  height: 100px;
 	font-family: Arial;
   position: relative;
   text-align: center;
+  padding-top: 0;
 }
 #input-delete,
 #input-update {
@@ -84,6 +87,9 @@ h1{
 .minutes {
   display: inline-block;
   width: 50%;
+}
+.katie{
+  background-color: gray;
 }
 
 .hours {
