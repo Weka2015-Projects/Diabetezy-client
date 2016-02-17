@@ -36,13 +36,13 @@ export const saveBloodTest = (action, callback) => {
 }
 
 export const deleteBloodTest = (action, callback) => {
-  console.log('dg')
   let url = `${ref}users/${auth.uid}/tests/${action.id}.json?auth=${auth.token}`
   let id
   request
     .del(url)
     .end((err, res) => {
-      callback(res.id)
+      console.log(action.id)
+      callback(action.id)
     })
 }
 
