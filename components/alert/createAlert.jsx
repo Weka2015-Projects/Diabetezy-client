@@ -12,7 +12,7 @@ class CreateAlert extends Component {
     this.state = {
       hourCounter: 0,
       minuteCounter: 0,
-      hourCounterLimit: 24,
+      hourCounterLimit: 23,
       minuteCounterLimit: 59,
       currentTime : moment().format('HH:mm')
     }
