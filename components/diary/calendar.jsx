@@ -1,9 +1,8 @@
  /*
 TO DO:
-  - timestamp printing to page rather than DD/MM/YYYY HH:mm
-  - Send updates to firebase, not dummy db
+  - Have individual cell light up
   - padding around elements on page
-  - ability to amend results
+  - tests
 */
 
 import React, {Component} from 'react'
@@ -14,7 +13,7 @@ import {users} from '../../test-data.json'
 import {connect} from 'react-redux'
 import {List, toJS} from 'immutable'
 import {Input, Button, Table} from 'react-bootstrap'
-import {saveBloodTest} from '../../firebaseWrapper'
+import {saveBloodTest, deleteBloodTest} from '../../firebaseWrapper'
 
 class Calendar extends Component {
 
@@ -26,7 +25,7 @@ class Calendar extends Component {
       currentMonth: moment().format('M'),
       currentDay: moment().format('D'),
       currentTime: moment().format('HH:mm'),
-      newTestValue: 0.0
+      newTestValue: 0
     }
   }
 
@@ -39,7 +38,6 @@ class Calendar extends Component {
     var currentDay = this.selectedDay()
     var start = currentDay.startOf('day').unix()
     var end = currentDay.endOf('day').unix()
-
     return this.props.tests.filter((test) => {
       var timestamp = test.get('timestamp')
       return timestamp < end && timestamp > start
@@ -51,9 +49,17 @@ class Calendar extends Component {
     this.props.saveNewTest(timestamp, this.state.newTestValue)
   }
 
+  deleteTest(test) {
+    var deleteDayTest = this.testsOnSelectedDay().toJS()
+    var id = Object.keys(deleteDayTest)[0]
+    return this.props.destroyBloodTest(id)
+    }
+
   printTest(dayNum) {
     this.setState({currentDay: dayNum + 1})
     $('#inputs').css('display', 'inline-block')
+    $('.results').css('display', 'inline-block')
+    currentDay.style.backgroundColor = green
     $(dayNum).css('background-color', 'green')
   }
 
@@ -75,32 +81,36 @@ class Calendar extends Component {
 
   render() {
     var month = []
-    for(var dayNum = 0; dayNum < 31; dayNum++){
+    for(var dayNum = 0; dayNum < moment().daysInMonth(); dayNum++){
       month.push(<Day key={dayNum} index={dayNum} clickCb={this.printTest.bind(this)}/>)
     }
     var visibleTests = this.testsOnSelectedDay().map((test) => {
       return (
         <Table striped hover condensed relative>
+        <tbody>
         <tr>
           <th><strong>Blood sugar level</strong></th>
-          <th><strong>Time of test</strong></th>
+          <th colSpan="2"><strong>Time of test</strong></th>
         </tr>
           <tr key={'test_' + test.get('id')}>
             <td>{test.get('value')} mmol /L</td>
             <td>{moment.unix(test.get('timestamp')).format("hh:mm a")}</td>
+            <td><Input type="submit" src="" value="delete" onClick={this.deleteTest.bind(this)}></Input></td>
           </tr>
+          </tbody>
         </Table>
-    )})
+    )}
+  )
 
     return <div id="month">
       <div>
         <select value={this.state.currentMonth} onChange={this.saveMonth.bind(this)}>
-          <option value="12">December</option>
           <option value="1">January</option>
           <option value="2">February</option>
+          <option value="3">March</option>
+
         </select>
           <select value={this.state.currentYear} onChange={this.saveYear.bind(this)}>
-          <option value="2015">2015</option>
           <option value="2016">2016</option>
         </select>
       </div>
@@ -132,9 +142,16 @@ function mapDispatchToProps(dispatch) {
       saveBloodTest({timestamp: timestamp, value: value}, (id) => {
         dispatch({type: 'CREATE_BLOOD_TEST', id: id, timestamp: timestamp, value: value})
       })
-    }
+    },
+
+    destroyBloodTest: (myId) => {
+      deleteBloodTest({id: myId}, (id) => {
+        dispatch({type: 'DELETE_BLOOD_TEST', id: id})
+      }
+    )}
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
 
 

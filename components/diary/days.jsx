@@ -5,6 +5,7 @@ class Day extends Component {
 
 	handleClick() {
 	this.props.clickCb(this.props.index)
+	console.log(this.props.index)
 	}
 
 	render() {
