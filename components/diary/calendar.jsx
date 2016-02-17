@@ -1,4 +1,4 @@
-/*
+ /*
 TO DO:
   - Have individual cell light up
   - padding around elements on page
@@ -60,6 +60,7 @@ class Calendar extends Component {
     $('#inputs').css('display', 'inline-block')
     $('.results').css('display', 'inline-block')
     currentDay.style.backgroundColor = green
+    $(dayNum).css('background-color', 'green')
   }
 
   saveMonth(e) {
