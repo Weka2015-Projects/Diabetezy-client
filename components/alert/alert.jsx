@@ -8,9 +8,8 @@ class Alert extends Component {
     let alertsArray = this.props.alerts.map((alert, id) => {
       const time = alert.get('time')
       return (
-          <div key={alert.get('id')}><Link to={`/alerts/${id}/${time}`}>{alert.get('time')}</Link></div>
-        
-      )
+          <div key={alert.get('id')}>{alert.get('time')}<Link to={`/alerts/${id}/${time}`}>[x]</Link></div>
+        )
     })
     return(
       <div>
