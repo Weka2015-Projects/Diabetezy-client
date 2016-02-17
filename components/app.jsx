@@ -5,9 +5,11 @@ import Alarm from './alert/alarm.jsx'
 class App extends Component{
 	render() {
 		return (
-			<div>
-        <Alarm />
+			<div className="index">
+        		<Alarm />
+        		<div id="routes">
 				{routes}
+				</div>
 			</div>
 		)
 	}

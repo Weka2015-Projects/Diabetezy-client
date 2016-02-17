@@ -23,7 +23,6 @@ class EditAlert extends Component {
   deleteButton = () => {
     const id = this.state.id
     this.props.destroy(id)
-    alert("You has deleted it")
   };
 
   render() {

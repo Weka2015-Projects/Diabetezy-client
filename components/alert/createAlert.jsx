@@ -63,7 +63,6 @@ class CreateAlert extends Component {
   saveButton = () => {
     let time = this.handleCountertoDB()
     this.props.saveNewAlert(time)
-    alert('tiny little handz')
   };
 
   handleAlertTime = () => {
@@ -80,21 +79,20 @@ class CreateAlert extends Component {
         </div>
         <h2>Set An Alert For:</h2>
         <div className="hours">
-          <button onClick={this.handleHourIncrease}>++</button>
+          <Button onClick={this.handleHourIncrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">++</Button>
             <h2>{this.state.hourCounter}</h2>
-          <button onClick={this.handleHourDecrease}>--</button>
+          <Button onClick={this.handleHourDecrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">--</Button>
         </div>
 
         <div className="minutes">
-          <button onClick={this.handleMinuteIncrease}>++</button>
+          <Button onClick={this.handleMinuteIncrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">++</Button>
             <h2>{this.state.minuteCounter}</h2>
-          <button onClick={this.handleMinuteDecrease}>--</button>
+          <Button onClick={this.handleMinuteDecrease} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">--</Button>
         </div>
 
         <div className="buttons">
-            <button onClick={this.saveButton}>Set Alert</button>
-        </div>
-
+            <Button onClick={this.saveButton} class="btn btn-default" color="rgba(209, 208, 213, 0.48)">Save Alert</Button>
+          </div>
       </div>
       )
     }
