@@ -1,5 +1,6 @@
 import chai, {expect} from 'chai'
 import {List, Map} from 'immutable'
+import {INITIAL_STATE} from '../reducer.js'
 
 import reducer from '../reducer.js'
 
@@ -9,20 +10,21 @@ describe('1 + 1', () => {
 	})
 })
 
-describe('action with no type', () => {
+
+describe('CREATE_ALERT', () => {
 	it('returns state unmodified', () => {
 		//arrange
 		const initialState = reducer(undefined, {})
 		//act
-		const newState = reducer(initialState, {})
+		const newState = reducer(initialState, {type:'CREATE_ALERT', id: 1, time: "11:00"})
 		//assert
-		expect(initialState).to.equal(newState)
+		expect(initialState).to.not.equal(newState)
 	})
 	it('modifies the state', () => {
 		const initialState = Map({ tests: List.of(), alerts: List.of() })
-		const action = {type: 'CREATE_BLOOD_TEST', id: 8, timestamp: 1455483273, value: "45"}
+		const action = {type: 'CREATE_ALERT', id: 2, time: "10:45"}
 		const newState = reducer(initialState, action)
-		expect(newState.get('tests').size).to.equal(1)
+		expect(newState.get('alerts').size).to.equal(3)
 
 	})
 })

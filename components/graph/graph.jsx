@@ -8,11 +8,11 @@ import {List, toJS} from 'immutable'
 import {getDataFromFirebase} from '../../firebaseWrapper'
 
 const getChartData = (tests) => {
-  return tests.map((test) => {
-    return (
+  return tests.map(function(test) {
+    return [
     moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
     test.get('value')
-    )
+    ]
   })
 }
 
@@ -82,6 +82,7 @@ class BloodTestChart extends Component {
 }
 
 function mapStateToProps(state) {
+console.log('the state', state)
   return {
     tests: state.get('tests')
   }
