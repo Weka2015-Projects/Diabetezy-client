@@ -1,0 +1,98 @@
+#bootstrap-override body {
+  margin: auto;
+  border-radius: 14px;
+  width: 800px;
+  height: 800px;
+  position: relative;
+}
+.index{
+  margin: 0 auto;
+}
+#bootstrap-override table{
+  margin-bottom: 4px;
+  width: 100%;
+}
+.navigation {
+  font-family: Helvetica;
+  font-size: 16px;
+  text-align: center;
+}
+#bootstrap-override select .form-group {
+  margin-bottom: 0 auto;
+
+}
+.day{
+  border: 1px solid #eee;
+  background-color: null;
+  float: left;
+  font-style: Helvetica;
+  font-size: 14;
+  height: 48px;
+  line-height: 50px;
+  width: 48px;
+}
+.day:hover * {
+  background-color: gold;
+}
+
+#inputs{
+  padding-top: 20px;
+  display: none;
+  width: 65%;
+  margin: 0 0 20px 0;
+  float: left;
+  text-align: left;
+}
+
+#month{
+	width: 370px;
+	margin: auto;
+}
+
+select{
+  margin: 10px;
+  padding: 1px;
+}
+
+td{
+  text-align: left;
+}
+div {
+  text-align: center;
+  margin: 0 auto;
+}
+.control-label{
+  text-align: left;
+}
+
+h1{
+	font-family: Arial;
+  position: relative;
+  text-align: center;
+}
+#input-delete,
+#input-update {
+  width: 35%;
+}
+
+.change-report {
+  position: relative;
+}
+
+/* Alarm Digits */
+
+.minutes {
+  display: inline-block;
+  width: 50%;
+}
+
+.hours {
+  display: inline-block;
+  width: 50%;
+}
+.results {
+  display: none;
+  text-align: left;
+  margin: 0 0 20px 0;
+  float: left;
+}
