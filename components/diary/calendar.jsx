@@ -143,8 +143,8 @@ function mapDispatchToProps(dispatch) {
       })
     },
 
-    destroyBloodTest: (id) => {
-      deleteBloodTest({id: id}, (id) => {
+    destroyBloodTest: (myId) => {
+      deleteBloodTest({id: myId}, (id) => {
         dispatch({type: 'DELETE_BLOOD_TEST', id: id})
       }
     )}

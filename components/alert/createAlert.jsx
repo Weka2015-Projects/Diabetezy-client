@@ -68,7 +68,6 @@ class CreateAlert extends Component {
   };
 
   deleteButton = () => {
-    console.log("delete")
     //delete alert from firebase
   };
 
