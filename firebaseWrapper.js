@@ -43,6 +43,7 @@ export const deleteBloodTest = (action, callback) => {
     .end((err, res) => {
       callback(action.id)
     })
+  }
 
 export const saveAlert = (action, callback) => {
   let url = `${ref}users/${auth.uid}/alerts.json?auth=${auth.token}`
