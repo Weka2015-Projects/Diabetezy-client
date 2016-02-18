@@ -7,12 +7,14 @@ import {connect} from 'react-redux'
 
 
 const getChartData = (tests) => {
-  return tests.map(function(test) {
-    return [
+  const data = []
+  tests.forEach(function(test) {
+    data.push([
     moment.unix(test.get('timestamp')).format("MM/DD/YYYY, h:mm"),
-    test.get('value')
-    ]
+    parseInt(test.get('value'))
+    ])
   })
+  return data
 }
 
 
@@ -53,24 +55,29 @@ chart: {
 
 
 class BloodTestChart extends Component {
-    componentDidMount() {
-       let chartData = getChartData(this.props.tests).toJS()
-       let chart = this.refs.chart.getChart()
-       chart.series[0].setData(chartData)
-       chart.series[1].setData(chartData)
-       console.log(chartData)
-     }
-
-    render() {
-      return (
-      <div>
-      <Link to={`/home`}>Home</Link><br/>
-      <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
-      </div>)
+  constructor(props) {
+    super(props)
+    this.state = {
     }
+  }
+
+  componentDidUpdate() {
+     let chartData = getChartData(this.props.tests)
+     let chart = this.refs.chart.getChart()
+     chart.series[0].setData(chartData)
+   }
+
+  render() {
+    return (
+    <div>
+    <Link to={`/home`}>Home</Link><br/>
+    <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
+    </div>)
+  }
 }
 
 function mapStateToProps(state) {
+  console.log(state.toJS())
   return {
     tests: state.get('tests')
   }
