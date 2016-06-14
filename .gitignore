@@ -1,7 +1,5 @@
 node_modules
-npm-debug.log*
-
-/bundle.js
-
+*.log
 .DS_Store
-/dist
+./dist/bundle.js
+.eslintcache
