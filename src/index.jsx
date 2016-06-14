@@ -1,10 +1,12 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
+import { render } from 'react-dom'
 import reducer from './reducer.js'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {getDataFromFirebase, onFirebaseAuth} from './firebaseWrapper'
 import {Button} from 'react-bootstrap'
+
+import './assets/styles/index.css'
 
 import App from './components/app.jsx'
 
@@ -15,11 +17,14 @@ onFirebaseAuth(() => {
   })
 })
 
-const app = document.createElement('div')
+const div = document.createElement('div')
+document.body.appendChild(div)
+div.id = ('bootstrap-override')
+document.body.appendChild(div)
+div.id = ('app')
+div.class = ('index')
 
-document.body.appendChild(app)
-
-ReactDOM.render(
+render(
   <Provider store={store}>
     <App />
   </Provider>, 

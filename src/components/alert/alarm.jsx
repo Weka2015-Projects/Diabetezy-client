@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import Alert from './alert.jsx'
 import moment from 'moment'
 
+import sound from '../../assets/audio/airhorn.mp3'
+
 class Alarm extends Component {
 
-
-
   soundTheAlarm(){
-    let audio = new Audio('audio/airhorn.mp3')
+    let audio = new Audio(sound)
     this.props.alerts.forEach(function(alert){
       if((alert.get('time')) == moment().format('HH:mm')){
         audio.play()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 
 import Diary from './diary/diary.jsx'
 import Alert from './alert/alert.jsx'
@@ -10,7 +10,7 @@ import CreateAlert from './alert/createAlert.jsx'
 import EditAlert from './alert/editAlert.jsx'
 
 export default (
-    <Router>
+    <Router history={hashHistory}>
         <Route path='/' component={Login} />
         <Route path='/home' component ={Homepage} />
         <Route path='/alert' component ={Alert} />

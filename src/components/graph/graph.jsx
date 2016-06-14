@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
 import Highcharts from 'highcharts'
-import ReactHighcharts from 'react-highcharts/bundle/highcharts'
+import ReactHighcharts from 'react-highcharts'
 import moment from 'moment'
 import {connect} from 'react-redux'
 

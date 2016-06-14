@@ -9,11 +9,10 @@ p{
   margin-left: 10%;
 }
 body {
-    background-image: url('images/katie.jpg');
-    background-repeat: no-repeat;
+    background: url('../images/katie.jpg') no-repeat white;
     font-family: 'Quicksand', sans-serif;
-
 }
+
 .index{
   margin: 0 auto;
 }
