@@ -45,7 +45,13 @@ const common = {
         include: PATHS.src
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Diabetezy',
+      template: path.join(PATHS.src, 'assets/templates/index.ejs')
+    })
+  ]
 }
 
 const startConfig = {
@@ -58,15 +64,20 @@ const startConfig = {
     progress: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'Diabetezy',
-      template: path.join(PATHS.src, 'assets/templates/index.ejs')
-    })
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
 
-const buildConfig = {}
+const buildConfig = {
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin()
+  ]
+}
 
 const config = (TARGET === 'start' || !TARGET)
   ? merge(common, startConfig)
