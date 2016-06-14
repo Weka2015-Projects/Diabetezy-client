@@ -20,7 +20,9 @@ const common = {
   },
   output: {
     path: PATHS.dist,
-    filename: 'bundle.js'
+    publicPath: '/Diabetezy-client/',
+    filename: '[name].[chunkhash].js',
+    chunkFileName: '[chunkhash].js'
   },
   module: {
     loaders: [
